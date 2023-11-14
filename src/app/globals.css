@@ -3,25 +3,85 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+	--foreground-rgb: 0, 0, 0;
+	--background-start-rgb: 214, 219, 220;
+	--background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+	:root {
+		--foreground-rgb: 255, 255, 255;
+		--background-start-rgb: 0, 0, 0;
+		--background-end-rgb: 0, 0, 0;
+	}
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+	color: rgb(var(--foreground-rgb));
+	background: linear-gradient(
+			to bottom,
+			transparent,
+			rgb(var(--background-end-rgb))
+		)
+		rgb(var(--background-start-rgb));
+}
+
+.text-stroke-black {
+	z-index: 0;
+	-webkit-text-stroke: 2px #0a0a0a;
+	-webkit-text-fill-color: transparent;
+}
+
+.text-stroke-green {
+	z-index: 0;
+	-webkit-text-stroke: 1px #b0f191;
+	/* -webkit-text-stroke: 1px red; */
+	-webkit-text-fill-color: transparent;
+}
+
+.stroke-shadow {
+	filter: drop-shadow(-2.5px 0 0 black) drop-shadow(0.5px 0 0 black)
+		drop-shadow(0 -2.5px 0 black) drop-shadow(0 0.5px 0 black);
+}
+
+.animate-move-30000 {
+	animation: move 50s linear infinite;
+}
+
+.animate-navigation {
+	animation: navigation 2s ease-in-out;
+}
+
+.line-animation {
+	position: relative;
+	z-index: 2;
+	stroke-dashoffset: 0;
+	stroke-dasharray: 5000;
+	stroke: black;
+	animation: dash 5s linear reverse;
+}
+
+@keyframes dash {
+	from {
+		stroke-dashoffset: 0;
+	}
+	to {
+		/* stroke-dashoffset: 35000; */
+		stroke-dashoffset: 5000;
+	}
+}
+
+@keyframes move {
+	to {
+		transform: translateX(-30%);
+	}
+}
+
+@keyframes navigation {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
