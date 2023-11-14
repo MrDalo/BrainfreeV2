@@ -16,7 +16,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" className=" scroll-smooth">
 			<body
-				className={`${andersonGrotesk.variable} bg-primary-green font-andersonGrotesk `}
+				className={`${andersonGrotesk.variable} scroll-smooth bg-primary-green font-andersonGrotesk`}
 			>
 				<Header />
 

@@ -64,7 +64,7 @@ const IntroSection = () => {
 					))}
 				</motion.h1>
 				<motion.p
-					className="  text-stroke-black absolute mb-[3px] ml-[3px] text-[4rem]  font-extralight leading-none sm:text-[6rem] md:text-[8rem] lg:text-[10rem] 2xl:text-[16rem]"
+					className="  text-stroke-black absolute mb-[4px] ml-[4px] text-[4rem]  font-extralight leading-none sm:text-[6rem] md:text-[8rem] lg:text-[10rem] 2xl:text-[16rem]"
 					initial="hidden"
 					animate="visible"
 					transition={{ staggerChildren: 0.1 }}

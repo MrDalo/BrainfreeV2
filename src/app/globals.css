@@ -40,8 +40,8 @@ body {
 }
 
 .stroke-shadow {
-	filter: drop-shadow(-2.5px 0 0 black) drop-shadow(0.5px 0 0 black)
-		drop-shadow(0 -2.5px 0 black) drop-shadow(0 0.5px 0 black);
+	filter: drop-shadow(3px 0 0 rgb(110, 110, 110))
+		drop-shadow(0 3px 0 rgb(110, 110, 110));
 }
 
 .animate-move-30000 {
