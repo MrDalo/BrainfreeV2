@@ -40,7 +40,6 @@ const IntroSection = () => {
 					mask="url(#path-1-inside-1_150_40)"
 				/>
 			</svg>
-
 			<div className=" relative  flex flex-row items-end justify-start gap-5 py-10 lg:px-12">
 				<motion.h1
 					className=" z-10 text-[4rem]  font-extralight leading-none sm:text-[6rem] md:text-[8rem] lg:text-[10rem] 2xl:text-[16rem]"

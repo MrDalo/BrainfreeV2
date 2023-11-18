@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import IntroSection from './components/IntroSection';
-import MatrixSection from './components/MatrixSection';
-import Footer from './components/Footer';
+import IntroSection from '../components/IntroSection';
+import MatrixSection from '../components/MatrixSection';
+import Footer from '../components/Footer';
 
 export default function Home() {
 	return (
