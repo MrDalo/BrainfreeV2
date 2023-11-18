@@ -30,7 +30,7 @@ const SignInPage = () => {
 					))}
 				</motion.h1>
 				<motion.p
-					className=" text-stroke-black absolute mb-[6px] ml-[6px] text-[5rem]  font-extralight leading-none sm:text-[6rem] md:text-[7.2rem] lg:text-[9.7rem] xl:text-[12rem] 2xl:text-[14rem]"
+					className="text-stroke-black absolute mb-[4px] ml-[4px] text-[5rem] font-extralight leading-none  sm:text-[6rem] md:mb-[6px] md:ml-[6px] md:text-[7.2rem] lg:text-[9.7rem] xl:text-[12rem] 2xl:text-[14rem]"
 					initial="hidden"
 					animate="visible"
 					transition={{ staggerChildren: 0.1 }}
