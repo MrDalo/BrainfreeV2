@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { andersonGrotesk } from '../font';
 import '../globals.css';
+import SideMenu from '@/app/components/side-menu';
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -15,9 +16,14 @@ export default function RootLayout({
 	return (
 		<html lang="en" className=" scroll-smooth">
 			<body
-				className={`${andersonGrotesk.variable} scroll-smooth  font-andersonGrotesk`}
+				className={`${andersonGrotesk.variable} font-teleGrotesk relative flex flex-row flex-nowrap `}
 			>
-				{children}
+				<main className=" relative flex h-screen w-full flex-row flex-nowrap items-start justify-start bg-[#fff]">
+					<SideMenu />
+					<div className="flex h-screen w-full flex-col items-start justify-center overflow-hidden bg-[#fff] px-4  py-10 md:px-8 lg:pr-12">
+						{children}
+					</div>
+				</main>
 			</body>
 		</html>
 	);
