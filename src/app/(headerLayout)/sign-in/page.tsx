@@ -4,6 +4,8 @@ import Link from 'next/link';
 import React from 'react';
 import Image from 'next/image';
 
+import { signIn } from 'next-auth/react';
+
 const SignInPage = () => {
 	return (
 		<main className="flex h-[calc(100vh-106px)]  flex-col items-start justify-start bg-primary-green text-primary-black md:flex-row">
@@ -84,8 +86,8 @@ const SignInPage = () => {
 						<hr className="w-1/3 border-primary-black" />
 					</div>
 					<div className="flex w-full flex-col flex-nowrap items-center gap-3">
-						<Link
-							href=""
+						<button
+							onClick={() => signIn('discord')}
 							className=" button-shadow stroke-shadow relative flex w-[80%] flex-row items-center justify-center rounded-full border bg-white px-5 py-2 duration-100 hover:scale-105 sm:gap-[30%] md:w-2/3 md:gap-[20%]"
 						>
 							<Image
@@ -96,7 +98,7 @@ const SignInPage = () => {
 								className=" absolute left-6 object-contain"
 							/>
 							<p>Continue with Google</p>
-						</Link>
+						</button>
 						<Link
 							href=""
 							className=" button-shadow stroke-shadow relative  flex w-[80%] flex-row items-center justify-center rounded-full border bg-white px-5 py-2 duration-100 hover:scale-105 sm:gap-[30%] md:w-2/3 md:gap-[20%]"
