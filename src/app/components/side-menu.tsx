@@ -3,6 +3,7 @@ import Link from 'next/link';
 import React, { useEffect } from 'react';
 import Image from 'next/image';
 import { useState } from 'react';
+import { signOut } from 'next-auth/react';
 
 const SideMenu = () => {
 	const [sideMenuOpen, setsideMenuOpen] = useState(false);
@@ -63,8 +64,8 @@ const SideMenu = () => {
 				>
 					<Image
 						src="/img/matrix-icon.svg"
-						height={20}
-						width={20}
+						height={25}
+						width={25}
 						alt="matrix-icon"
 					/>
 					Prioritize matrix
@@ -97,8 +98,8 @@ const SideMenu = () => {
 				>
 					<Image
 						src="/img/guide-icon.svg"
-						height={20}
-						width={20}
+						height={25}
+						width={25}
 						alt="guide-icon"
 					/>
 					Guide
@@ -114,12 +115,28 @@ const SideMenu = () => {
 				>
 					<Image
 						src="/img/manage-users-icon.svg"
-						height={20}
-						width={20}
+						height={25}
+						width={25}
 						alt="manage-users-icon"
 					/>
 					Manage users
 				</Link>
+				<button
+					className={`${
+						sideMenuOpen ? 'flex' : 'hidden'
+					} w-full flex-row items-center justify-center gap-4 whitespace-nowrap px-8 py-5 text-[1.4rem] leading-none  text-[#96969E] duration-200 hover:bg-[#292929] md:justify-start`}
+					onClick={() => {
+						signOut({ callbackUrl: '/' });
+					}}
+				>
+					<Image
+						src="/img/sign-out-icon.svg"
+						height={20}
+						width={20}
+						alt="sign-out-icon"
+					/>
+					Sing out
+				</button>
 			</nav>
 		</aside>
 	);
