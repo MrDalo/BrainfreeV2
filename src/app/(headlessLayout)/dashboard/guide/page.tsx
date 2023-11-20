@@ -11,7 +11,7 @@ const DashboardPage = async () => {
 	}
 	return (
 		<div className=" flex items-center justify-center text-black">
-			<h1 className=" text-[3rem]">Dashboard page</h1>
+			<h1 className=" text-[3rem]">Guide page</h1>
 		</div>
 	);
 };
