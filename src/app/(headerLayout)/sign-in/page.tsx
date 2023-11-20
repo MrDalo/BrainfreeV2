@@ -87,7 +87,11 @@ const SignInPage = () => {
 					</div>
 					<div className="flex w-full flex-col flex-nowrap items-center gap-3">
 						<button
-							onClick={() => signIn('discord')}
+							onClick={() =>
+								signIn('discord', {
+									callbackUrl: 'http://localhost:3000/dashboard'
+								})
+							}
 							className=" button-shadow stroke-shadow relative flex w-[80%] flex-row items-center justify-center rounded-full border bg-white px-5 py-2 duration-100 hover:scale-105 sm:gap-[30%] md:w-2/3 md:gap-[20%]"
 						>
 							<Image
