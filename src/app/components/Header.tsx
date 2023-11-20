@@ -7,12 +7,12 @@ const Header = () => {
 	const pathname = usePathname();
 
 	return (
-		<header className=" flex w-full flex-row items-center justify-center bg-primary-green px-5 py-6 sm:justify-end sm:px-16 ">
+		<header className=" absolute  flex w-full flex-row items-center justify-center bg-primary-green px-5 py-6 sm:justify-end sm:px-16">
 			<nav className=" animate-navigation flex flex-row items-center gap-6 sm:gap-12">
 				{pathname !== '/sign-in' ? (
 					<Link
 						href="/sign-in"
-						className="rounded-full bg-primary-black px-[30px] py-[5px] text-[1.5rem] font-light text-primary-green duration-150 hover:scale-105"
+						className="z-30 rounded-full bg-primary-black px-[30px] py-[5px] text-[1.5rem] font-light text-primary-green duration-150 hover:scale-105"
 					>
 						Sign in
 					</Link>
@@ -23,7 +23,7 @@ const Header = () => {
 				{pathname !== '/sign-up' ? (
 					<Link
 						href="/sign-up"
-						className=" mt-[5px] text-[1.5rem] font-light text-primary-black duration-150 hover:scale-105 2xl:text-[1.75rem]"
+						className=" z-30 mt-[5px] text-[1.5rem] font-light text-primary-black duration-150 hover:scale-105 2xl:text-[1.75rem]"
 					>
 						Sign up
 					</Link>
@@ -34,7 +34,7 @@ const Header = () => {
 				{pathname !== '/' ? (
 					<Link
 						href="/"
-						className="mt-[5px] text-[1.5rem] font-light text-primary-black duration-150 hover:scale-105 2xl:text-[1.75rem]"
+						className="z-30 mt-[5px] text-[1.5rem] font-light text-primary-black duration-150 hover:scale-105 2xl:text-[1.75rem]"
 						// className="rounded-full bg-primary-black px-[30px] py-[5px] text-[1.5rem] font-light text-primary-green duration-150 hover:scale-105"
 					>
 						Back

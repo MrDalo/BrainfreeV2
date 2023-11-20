@@ -14,17 +14,11 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en" className=" scroll-smooth">
-			<body
-				className={`${andersonGrotesk.variable} font-teleGrotesk relative flex flex-row flex-nowrap `}
-			>
-				<main className=" relative flex h-screen w-full flex-row flex-nowrap items-start justify-start bg-[#fff]">
-					<SideMenu />
-					<div className="flex h-screen w-full flex-col items-start justify-center overflow-hidden bg-[#fff] px-4  py-10 md:px-8 lg:pr-12">
-						{children}
-					</div>
-				</main>
-			</body>
-		</html>
+		<main className=" relative flex h-screen w-full flex-row flex-nowrap items-start justify-start bg-[#fff]">
+			<SideMenu />
+			<div className="flex h-screen w-full flex-col items-start justify-center overflow-hidden bg-[#fff] px-4  py-10 md:px-8 lg:pr-12">
+				{children}
+			</div>
+		</main>
 	);
 }

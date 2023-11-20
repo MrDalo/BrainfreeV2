@@ -8,7 +8,7 @@ import { signIn } from 'next-auth/react';
 
 const SignInPage = () => {
 	return (
-		<main className="flex h-[calc(100vh-106px)]  flex-col items-start justify-start bg-primary-green text-primary-black md:flex-row">
+		<main className="flex h-[120vh] flex-col  items-center justify-start bg-primary-green text-primary-black md:h-[100vh] md:flex-row">
 			<div className=" relative flex  h-full w-full flex-col items-center justify-center pt-10 md:w-1/2 md:pt-0">
 				<motion.h1
 					className=" z-10 text-[5rem]  font-extralight leading-none sm:text-[6rem] md:text-[7.2rem] lg:text-[9.7rem] xl:text-[12rem] 2xl:text-[14rem]"
@@ -32,7 +32,7 @@ const SignInPage = () => {
 					))}
 				</motion.h1>
 				<motion.p
-					className="text-stroke-black absolute mb-[4px] ml-[4px] text-[5rem] font-extralight leading-none  sm:text-[6rem] md:mb-[6px] md:ml-[6px] md:text-[7.2rem] lg:text-[9.7rem] xl:text-[12rem] 2xl:text-[14rem]"
+					className="text-stroke-black absolute mb-[4px] ml-[4px] text-[5rem] font-extralight leading-none sm:text-[6rem] md:mb-[6px] md:ml-[6px] md:text-[7.2rem] lg:text-[9.7rem] xl:text-[12rem] 2xl:text-[14rem]"
 					initial="hidden"
 					animate="visible"
 					transition={{ staggerChildren: 0.1 }}
@@ -53,7 +53,7 @@ const SignInPage = () => {
 					))}
 				</motion.p>
 			</div>
-			<div className=" bg-primary-white relative flex  w-full flex-col flex-nowrap items-center justify-center py-[10vh] text-primary-black md:h-full md:w-1/2 md:py-0">
+			<div className=" bg-primary-white relative flex  w-full flex-col flex-nowrap items-center justify-center  pb-[10vh] text-primary-black md:h-full md:w-1/2 md:py-0 md:pb-0">
 				<div className="  flex w-full flex-col flex-nowrap sm:w-2/3 md:w-full xl:w-2/3">
 					<form
 						action=""

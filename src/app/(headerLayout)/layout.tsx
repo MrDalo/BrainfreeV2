@@ -16,14 +16,10 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en" className=" scroll-smooth">
-			<body
-				className={`${andersonGrotesk.variable} scroll-smooth bg-primary-green font-andersonGrotesk`}
-			>
-				<Header />
+		<>
+			<Header />
 
-				<Providers>{children}</Providers>
-			</body>
-		</html>
+			<Providers>{children}</Providers>
+		</>
 	);
 }
