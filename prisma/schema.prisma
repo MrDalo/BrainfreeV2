@@ -10,13 +10,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Todo {
-  id          Int      @id @default(autoincrement())
+model Task {
+  id          String    @id @default(cuid())
   title       String
   description String?
   completed   Boolean  @default(false)
   deadline    DateTime
-  priority    TodoPriority
+  priority    TaskPriority
   userId      String
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
@@ -57,7 +57,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  todos         Todo[]
+  todos         Task[]
 }
 
 model VerificationToken {
@@ -73,9 +73,10 @@ enum Role {
   ADMIN
 }
 
-enum TodoPriority {
+enum TaskPriority {
   URGENT_IMPORTANT
   URGENT_NOT_IMPORTANT
   NOT_URGENT_IMPORTANT
   NOT_URGENT_NOT_IMPORTANT
+  NOT_ASSIGNED
 }
