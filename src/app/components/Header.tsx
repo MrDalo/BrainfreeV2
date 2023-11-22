@@ -12,7 +12,7 @@ const Header = () => {
 				{pathname !== '/sign-in' ? (
 					<Link
 						href="/sign-in"
-						className="z-30 rounded-full bg-primary-black px-[30px] pb-2 pt-[5px] text-[1.5rem] font-light text-primary-green duration-150 hover:scale-105"
+						className="z-30 rounded-full bg-primary-black px-[30px] pb-1 pt-[5px] text-[1.5rem] font-light text-primary-green duration-150 hover:scale-105"
 					>
 						Sign in
 					</Link>

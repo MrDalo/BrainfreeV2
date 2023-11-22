@@ -135,7 +135,7 @@ const SideMenu = () => {
 						width={20}
 						alt="sign-out-icon"
 					/>
-					Sing out
+					Sign out
 				</button>
 			</nav>
 		</aside>

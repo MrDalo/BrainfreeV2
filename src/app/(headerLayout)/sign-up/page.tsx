@@ -5,13 +5,13 @@ import { redirect } from 'next/navigation';
 import SignUpForm from '@/app/components/sign-up-form';
 
 const SignUpPage = async () => {
-	const status = await getServerAuthSession();
+	// const status = await getServerAuthSession();
 
-	// console.log(status);
+	// // console.log(status);
 
-	if (status) {
-		redirect('/dashboard');
-	}
+	// if (status) {
+	// 	redirect('/dashboard');
+	// }
 
 	return (
 		<main className="z-30 flex h-[120vh] flex-col items-center justify-start bg-primary-green text-primary-black md:h-[100vh] md:flex-row">
