@@ -16,7 +16,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" className=" scroll-smooth">
 			<body
-				className={`${andersonGrotesk.variable} font-teleGrotesk relative `}
+				className={`${andersonGrotesk.variable} relative font-andersonGrotesk `}
 				// className={`${andersonGrotesk.variable} font-teleGrotesk relative flex flex-row flex-nowrap `}
 			>
 				<Providers>{children}</Providers>

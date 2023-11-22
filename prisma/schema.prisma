@@ -6,15 +6,19 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model Todo {
-  id          Int     @id @default(autoincrement())
+model Task {
+  id          String    @id @default(cuid())
   title       String
-  description String
-  completed   Boolean
+  description String?
+  completed   Boolean  @default(false)
+  deadline    DateTime
+  priority    TaskPriority
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Account {
@@ -48,11 +52,12 @@ model User {
   id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
-  role          String    @default("user")
+  role          Role    @default(USER)
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
+  todos         Task[]
 }
 
 model VerificationToken {
@@ -61,4 +66,17 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum TaskPriority {
+  URGENT_IMPORTANT
+  URGENT_NOT_IMPORTANT
+  NOT_URGENT_IMPORTANT
+  NOT_URGENT_NOT_IMPORTANT
+  NOT_ASSIGNED
 }
