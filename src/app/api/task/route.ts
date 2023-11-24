@@ -7,7 +7,6 @@ export const POST = async (
     req: NextRequest
 ) => {
     const bodyJson = await req.json();
-    console.log(bodyJson);
 
     try {
         const task: Task = await prisma.task.create({
