@@ -19,6 +19,7 @@ const DraggableTodo = ({
 					{...provided.draggableProps}
 					{...provided.dragHandleProps}
 					ref={provided.innerRef}
+					onClick={() => console.log('clicked')}
 				>
 					{title}
 				</div>

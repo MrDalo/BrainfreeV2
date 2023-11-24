@@ -3,55 +3,10 @@
 import { useState } from 'react';
 import DnDContext from './DnDContext';
 import DroppableTodoField from './DroppableTodoField';
+import { Task, TaskPriority } from '@prisma/client';
 
-const todosall: Todo[] = [
-	{
-		id: '1',
-		title: 'Todo 1',
-		description: 'big big big',
-		completed: false,
-		taskPriority: '1'
-	},
-	{
-		id: '2',
-		title: 'Todo 2',
-		description: 'big big big',
-		completed: true,
-		taskPriority: '1'
-	},
-	{
-		id: '35',
-		title: 'Todo 35',
-		description: 'big big big',
-		completed: false,
-		taskPriority: '1'
-	},
-	{
-		id: '4',
-		title: 'Todo 4',
-		description: 'big big big',
-		completed: false,
-		taskPriority: '2'
-	},
-	{
-		id: '5',
-		title: 'Todo 5',
-		description: 'big big big',
-		completed: true,
-		taskPriority: '4'
-	},
-	{
-		id: '42',
-		title: 'Todo 42',
-		description: 'big big big',
-		completed: false,
-		taskPriority: '4'
-	}
-];
-
-const Dashboard = () => {
-	//todo get from db
-	const [todos, setTodos] = useState<Todo[]>(todosall);
+const Dashboard = ({ tasks }: { tasks: Task[] }) => {
+	const [todos, setTodos] = useState<Task[]>(tasks);
 
 	const handleDragAndDrop = (results: any) => {
 		const { destination, source } = results;
@@ -64,11 +19,11 @@ const Dashboard = () => {
 		)
 			return;
 
-		let pickedItem = todos.filter(x => x.taskPriority === source.droppableId)[
+		let pickedItem = todos.filter(x => x.priority === source.droppableId)[
 			source.index
 		];
 		console.log(pickedItem);
-		pickedItem.taskPriority = destination.droppableId;
+		pickedItem.priority = destination.droppableId;
 		console.log(pickedItem);
 		setTodos([...todos]);
 
@@ -81,30 +36,38 @@ const Dashboard = () => {
 				<div className="grid w-[50%] grid-cols-2 gap-1">
 					<div className="h-[40vh] w-full rounded-tl-[1.5rem] border bg-red-400 p-2">
 						<DroppableTodoField
-							droppableId="1"
+							droppableId={TaskPriority.URGENT_IMPORTANT}
 							droppableName="Do"
-							todos={todos.filter(x => x.taskPriority === '1')}
+							todos={todos.filter(
+								x => x.priority === TaskPriority.URGENT_IMPORTANT
+							)}
 						/>
 					</div>
 					<div className="h-[40vh] w-full rounded-tr-[1.5rem] border bg-blue-400 p-2">
 						<DroppableTodoField
-							droppableId="2"
+							droppableId={TaskPriority.NOT_URGENT_IMPORTANT}
 							droppableName="Schedule"
-							todos={todos.filter(x => x.taskPriority === '2')}
+							todos={todos.filter(
+								x => x.priority === TaskPriority.NOT_URGENT_IMPORTANT
+							)}
 						/>
 					</div>
 					<div className="h-[40vh] w-full rounded-bl-[1.5rem] border bg-yellow-400 p-2">
 						<DroppableTodoField
-							droppableId="3"
+							droppableId={TaskPriority.URGENT_NOT_IMPORTANT}
 							droppableName="Delegate"
-							todos={todos.filter(x => x.taskPriority === '3')}
+							todos={todos.filter(
+								x => x.priority === TaskPriority.URGENT_NOT_IMPORTANT
+							)}
 						/>
 					</div>
 					<div className="h-[40vh] w-full rounded-br-[1.5rem] border bg-green-400 p-2">
 						<DroppableTodoField
-							droppableId="4"
+							droppableId={TaskPriority.NOT_URGENT_NOT_IMPORTANT}
 							droppableName="Eliminate"
-							todos={todos.filter(x => x.taskPriority === '4')}
+							todos={todos.filter(
+								x => x.priority === TaskPriority.NOT_URGENT_NOT_IMPORTANT
+							)}
 						/>
 					</div>
 				</div>

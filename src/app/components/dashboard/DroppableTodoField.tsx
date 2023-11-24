@@ -2,6 +2,7 @@
 
 import { Droppable } from 'react-beautiful-dnd';
 import DraggableTodo from './DraggableTodo';
+import { Task } from '@prisma/client';
 
 const DroppableTodoField = ({
 	droppableId,
@@ -9,7 +10,7 @@ const DroppableTodoField = ({
 	droppableName
 }: {
 	droppableId: string;
-	todos: Todo[];
+	todos: Task[];
 	droppableName: string;
 }) => {
 	return (
