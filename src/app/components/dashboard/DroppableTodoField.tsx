@@ -17,11 +17,11 @@ const DroppableTodoField = ({
 		<Droppable droppableId={droppableId}>
 			{provided => (
 				<div
-					className="relative left-0 top-0 flex h-full w-full "
+					className="relative left-0 top-0 flex h-full w-full py-3 "
 					{...provided.droppableProps}
 					ref={provided.innerRef}
 				>
-					<div className="flex h-full w-full flex-col gap-2 overflow-y-auto overflow-x-hidden p-4">
+					<div className="scrollbar flex h-full w-full flex-col gap-2 overflow-y-auto overflow-x-hidden px-4 py-1">
 						{todos.map((todo, todoIndex) => (
 							<DraggableTodo
 								key={todoIndex}

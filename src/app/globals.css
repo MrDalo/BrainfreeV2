@@ -6,6 +6,10 @@
 	--foreground-rgb: 0, 0, 0;
 	--background-start-rgb: 214, 219, 220;
 	--background-end-rgb: 255, 255, 255;
+	--primary-black: #1A1A1A;
+	--secondary-black: #151515;
+	--primary-green: #B0F191;
+	--secondary-green: #a9e38e;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -90,4 +94,35 @@ body {
 	to {
 		opacity: 1;
 	}
+}
+
+/* Custom scrollbar */
+/* Firefox */
+.scrollbar {
+	scrollbar-width: thin;
+	scrollbar-color: var(--primary-green) var(--primary-black);
+}
+  
+/* Chrome, Edge and Safari */
+.scrollbar::-webkit-scrollbar {
+	height: 10px;
+	width: 10px;
+}
+.scrollbar::-webkit-scrollbar-track {
+	border-radius: 5px;
+	background-color: var(--secondary-black)
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+	border-radius: 6px;
+	background-color: var(--primary-green);
+	border: 1px solid var(--primary-black);
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+	background-color: var(--secondary-green);
+}
+
+.scrollbar::-webkit-scrollbar-thumb:active {
+	background-color: var(--secondary-green);
 }
