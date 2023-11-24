@@ -4,10 +4,15 @@ import { useState } from 'react';
 import DnDContext from './DnDContext';
 import DroppableTodoField from './DroppableTodoField';
 import { Task, TaskPriority } from '@prisma/client';
+import { resetServerContext } from 'react-beautiful-dnd';
 
 const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 	const [todos, setTodos] = useState<Task[]>(tasks);
+
+	resetServerContext();
+
 	console.log(todos);
+
 	const handleDragAndDrop = (results: any) => {
 		const { destination, source } = results;
 
