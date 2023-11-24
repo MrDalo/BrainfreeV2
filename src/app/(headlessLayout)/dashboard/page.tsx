@@ -14,7 +14,7 @@ const DashboardPage = async () => {
 	console.log(tasks);
 	console.log(users);
 	return (
-		<div className="absolute left-0 top-0 flex w-full flex-col items-center justify-center text-black">
+		<div className="absolute left-0 top-0 flex min-h-screen w-full flex-col items-center justify-center bg-black font-andersonGrotesk">
 			<Dashboard tasks={tasks} />
 		</div>
 	);

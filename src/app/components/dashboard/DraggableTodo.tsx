@@ -15,7 +15,7 @@ const DraggableTodo = ({
 		<Draggable key={id} draggableId={id} index={index}>
 			{provided => (
 				<div
-					className="w-full rounded-md bg-white px-4 py-2 shadow-lg"
+					className="w-full rounded-md bg-primary-green px-4 py-2 font-light text-primary-black shadow-todo-shadow"
 					{...provided.draggableProps}
 					{...provided.dragHandleProps}
 					ref={provided.innerRef}

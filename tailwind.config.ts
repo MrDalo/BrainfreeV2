@@ -19,6 +19,9 @@ const config: Config = {
 			},
 			fontFamily: {
 				andersonGrotesk: ['var(--font-andersonGrotesk)']
+			},
+			boxShadow: {
+				'todo-shadow':  '2px 2px 7px 0px rgba(156,221,125,1)'
 			}
 		}
 	},
