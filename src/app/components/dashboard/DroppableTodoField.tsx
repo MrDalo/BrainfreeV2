@@ -27,7 +27,7 @@ const DroppableTodoField = ({
 								key={todoIndex}
 								id={todo.id}
 								index={todoIndex}
-								title={todo.title}
+								todo={todo}
 							/>
 						))}
 						{provided.placeholder}
