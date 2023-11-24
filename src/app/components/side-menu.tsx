@@ -18,7 +18,7 @@ const SideMenu = () => {
 			className={`fixed flex h-screen
 			${
 				sideMenuOpen
-					? 'left-0 bg-[#0e0e0e] md:relative'
+					? 'left-0 top-0 bg-[#0e0e0e] md:relative'
 					: 'left-[calc((70px-100vw))] bg-transparent md:absolute md:left-[-230px]'
 			}
 			 z-30 w-full flex-col flex-nowrap items-start justify-start py-6  duration-300 md:min-w-[300px] md:max-w-[300px]`}
@@ -30,8 +30,13 @@ const SideMenu = () => {
 						height={35}
 						width={35}
 						alt="matrix-icon"
+						className={`${sideMenuOpen ? 'visible' : 'hidden'}`}
 					/>
-					<p className=" self-center whitespace-nowrap text-[2rem] text-[#b0f191]">
+					<p
+						className={`self-center whitespace-nowrap text-[2rem] text-[#b0f191] ${
+							sideMenuOpen ? 'visible' : 'hidden'
+						}`}
+					>
 						Brainfree
 					</p>
 				</div>
@@ -41,7 +46,7 @@ const SideMenu = () => {
 					viewBox="0 0 30 18"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
-					className="mr-5 mt-3 cursor-pointer"
+					className="mr-5 mt-3 cursor-pointer "
 					onClick={() => setsideMenuOpen(!sideMenuOpen)}
 				>
 					<path

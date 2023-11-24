@@ -19,12 +19,12 @@ export default async function RootLayout({
 	// console.log(status);
 	if (!status) {
 		// User unauthenticated, redirect to home
-		redirect('/');
+		redirect('/sign-in');
 	}
 	return (
-		<main className=" relative flex h-screen w-full flex-row flex-nowrap items-start justify-start bg-[#fff]">
+		<main className=" overflow-none relative box-border flex h-screen w-full flex-row flex-nowrap items-start justify-start bg-[#fff]">
 			<SideMenu />
-			<div className="flex h-screen w-full flex-col items-start justify-center overflow-hidden bg-[#fff] px-4  py-10 md:px-8 lg:pr-12">
+			<div className="box-border flex h-full w-full flex-col items-start justify-start overflow-auto bg-[#fff] px-4 py-20 text-black md:px-8 lg:pr-12">
 				{children}
 			</div>
 		</main>
