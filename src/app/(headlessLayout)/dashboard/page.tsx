@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 const DashboardPage = async () => {
 	const status = await getServerAuthSession();
 	const tasks = await prisma.task.findMany({
-		where: { userId: 'clpce75rk0002eo3dhdc3bj80' }
+		where: { userId: 'clpckoymo0000gf3hr4dqh059' }
 	});
 	const userId = status?.user?.id;
 	const users = await prisma.user.findMany();
