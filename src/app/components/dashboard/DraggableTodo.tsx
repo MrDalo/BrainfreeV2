@@ -4,17 +4,20 @@ import { Draggable } from 'react-beautiful-dnd';
 import TodoFormScreen from './todoFormScreen';
 import { Task } from '@prisma/client';
 import { useState } from 'react';
+import Checkbox from '../checkbox';
 
 const DraggableTodo = ({
 	id,
 	index,
 	todo,
-	colums
+	colums,
+	check
 }: {
 	id: string;
 	index: number;
 	todo: Task;
 	colums: boolean;
+	check: (todo: Task) => void;
 }) => {
 	const [openTodo, setOpenTodo] = useState<boolean>(false);
 
@@ -23,7 +26,7 @@ const DraggableTodo = ({
 			<Draggable key={id} draggableId={id} index={index}>
 				{provided => (
 					<div
-						className={`rounded-md bg-primary-green px-4 py-2 font-normal text-primary-black
+						className={`relative rounded-md bg-primary-green px-4 py-2 font-normal text-primary-black
 						${
 							todo.deadline < new Date()
 								? 'border border-red-600 text-red-600 shadow-todo-shadow-red'
@@ -33,9 +36,12 @@ const DraggableTodo = ({
 						{...provided.draggableProps}
 						{...provided.dragHandleProps}
 						ref={provided.innerRef}
-						onClick={() => setOpenTodo(true)}
 					>
-						{todo.title}
+						<p onClick={() => setOpenTodo(true)}>{todo.title}</p>
+						<button
+							className="absolute right-2 top-[50%] h-6 w-6 translate-y-[-50%] rounded-md border bg-white"
+							onClick={() => check(todo)}
+						></button>
 					</div>
 				)}
 			</Draggable>

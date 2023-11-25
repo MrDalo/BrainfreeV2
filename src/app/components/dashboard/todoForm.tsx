@@ -2,6 +2,7 @@
 
 import priorityTexts from '@/app/priority-texts';
 import { Task } from '@prisma/client';
+import Checkbox from '../checkbox';
 
 const TodoForm = ({ todo }: { todo: Task }) => {
 	return (
@@ -26,12 +27,7 @@ const TodoForm = ({ todo }: { todo: Task }) => {
 				</div>
 				<div className="mb-[1rem] flex flex-row items-start justify-start px-2 text-[1rem] sm:justify-end">
 					<h3 className="mr-4 text-primary-green">Completed: </h3>
-					<div className="checkbox-wrapper-18 mr-2">
-						<div className="round">
-							<input type="checkbox" id="checkbox-18" />
-							<label htmlFor="checkbox-18"></label>
-						</div>
-					</div>
+					<Checkbox />
 				</div>
 			</div>
 			<div className="flex items-center justify-center gap-[2rem]">

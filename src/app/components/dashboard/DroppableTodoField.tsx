@@ -7,11 +7,13 @@ import { Task } from '@prisma/client';
 const DroppableTodoField = ({
 	droppableId,
 	todos,
-	droppableName
+	droppableName,
+	check
 }: {
 	droppableId: string;
 	todos: Task[];
 	droppableName: string;
+	check: (todo: Task) => void;
 }) => {
 	return (
 		<Droppable droppableId={droppableId}>
@@ -32,6 +34,7 @@ const DroppableTodoField = ({
 								index={todoIndex}
 								todo={todo}
 								colums={droppableName === 'Assign'}
+								check={check}
 							/>
 						))}
 						{provided.placeholder}

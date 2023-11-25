@@ -5,15 +5,43 @@ import DnDContext from './DnDContext';
 import DroppableTodoField from './DroppableTodoField';
 import { Task, TaskPriority } from '@prisma/client';
 import { resetServerContext } from 'react-beautiful-dnd';
-import { redirect } from 'next/navigation';
 import Link from 'next/link';
+import { useMutation } from '@tanstack/react-query';
 
 const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 	const [todos, setTodos] = useState<Task[]>(tasks);
 
+	const [todosUncompleted, setTodosUncompleted] = useState<Task[]>(
+		tasks.filter(x => x.completed === false)
+	);
+
+	// Bug fix for react-beautiful-dnd
 	resetServerContext();
 
-	console.log(todos);
+	//console.log(todos);
+
+	const mutationPriority = useMutation({
+		mutationFn: (newPriority: { priority: TaskPriority; id: string }) =>
+			fetch(`/api/task/${newPriority.id}`, {
+				method: 'PUT',
+				body: JSON.stringify(newPriority)
+			})
+	});
+
+	const mutationCompleted = useMutation({
+		mutationFn: (todoComplete: { completed: boolean; id: string }) =>
+			fetch(`/api/task/${todoComplete.id}`, {
+				method: 'PUT',
+				body: JSON.stringify(todoComplete)
+			})
+	});
+
+	const todoComplete = (todo: Task) => {
+		todo.completed = true;
+		setTodos([...todos]);
+		setTodosUncompleted([...todos.filter(x => x.completed === false)]);
+		mutationCompleted.mutate(todo);
+	};
 
 	const handleDragAndDrop = (results: any) => {
 		const { destination, source } = results;
@@ -29,12 +57,11 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 		let pickedItem = todos.filter(x => x.priority === source.droppableId)[
 			source.index
 		];
-		console.log(pickedItem);
+		//console.log(pickedItem);
 		pickedItem.priority = destination.droppableId;
-		console.log(pickedItem);
+		//console.log(pickedItem);
 		setTodos([...todos]);
-
-		// todo save to db
+		mutationPriority.mutate(pickedItem);
 	};
 
 	return (
@@ -56,8 +83,9 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 						</h3>
 						<p className="my-[-0.5rem] text-[2.5rem]">
 							{
-								todos.filter(x => x.priority === TaskPriority.NOT_ASSIGNED)
-									.length
+								todosUncompleted.filter(
+									x => x.priority === TaskPriority.NOT_ASSIGNED
+								).length
 							}
 						</p>
 					</div>
@@ -66,7 +94,7 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 							Tasks to complete
 						</h3>
 						<p className="my-[-0.5rem] text-[2.5rem]">
-							{todos.filter(x => x.completed === false).length}
+							{todosUncompleted.length}
 						</p>
 					</div>
 					<div className="flex h-full w-[30%] flex-col items-center justify-center rounded-[1rem] bg-primary-green px-1 py-2">
@@ -93,9 +121,10 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 							<DroppableTodoField
 								droppableId={TaskPriority.URGENT_IMPORTANT}
 								droppableName="Do"
-								todos={todos.filter(
+								todos={todosUncompleted.filter(
 									x => x.priority === TaskPriority.URGENT_IMPORTANT
 								)}
+								check={todoComplete}
 							/>
 						</div>
 						<div className="relative h-[30vh] w-full rounded-tr-[1.5rem] bg-primary-black p-2">
@@ -108,9 +137,10 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 							<DroppableTodoField
 								droppableId={TaskPriority.NOT_URGENT_IMPORTANT}
 								droppableName="Schedule"
-								todos={todos.filter(
+								todos={todosUncompleted.filter(
 									x => x.priority === TaskPriority.NOT_URGENT_IMPORTANT
 								)}
+								check={todoComplete}
 							/>
 						</div>
 						<div className="relative h-[30vh] w-full rounded-bl-[1.5rem] bg-primary-black p-2">
@@ -123,9 +153,10 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 							<DroppableTodoField
 								droppableId={TaskPriority.URGENT_NOT_IMPORTANT}
 								droppableName="Delegate"
-								todos={todos.filter(
+								todos={todosUncompleted.filter(
 									x => x.priority === TaskPriority.URGENT_NOT_IMPORTANT
 								)}
+								check={todoComplete}
 							/>
 						</div>
 						<div className="relative h-[30vh] w-full rounded-br-[1.5rem] bg-primary-black p-2">
@@ -135,9 +166,10 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 							<DroppableTodoField
 								droppableId={TaskPriority.NOT_URGENT_NOT_IMPORTANT}
 								droppableName="Eliminate"
-								todos={todos.filter(
+								todos={todosUncompleted.filter(
 									x => x.priority === TaskPriority.NOT_URGENT_NOT_IMPORTANT
 								)}
+								check={todoComplete}
 							/>
 						</div>
 					</div>
@@ -151,9 +183,10 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 						<DroppableTodoField
 							droppableId={TaskPriority.NOT_ASSIGNED}
 							droppableName="Assign"
-							todos={todos.filter(
+							todos={todosUncompleted.filter(
 								x => x.priority === TaskPriority.NOT_ASSIGNED
 							)}
+							check={todoComplete}
 						/>
 					</div>
 				</DnDContext>
