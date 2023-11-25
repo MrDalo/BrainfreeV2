@@ -56,7 +56,7 @@ const SideMenu = () => {
 				<Link
 					className={`${
 						sideMenuOpen ? 'flex' : 'hidden'
-					} w-full flex-row items-center justify-center gap-4 whitespace-nowrap px-8 py-5 text-[1.4rem] leading-none  text-[#96969E] duration-200 hover:bg-[#292929] md:justify-start `}
+					} w-full flex-row items-center justify-center gap-4 whitespace-nowrap px-8 py-5 text-[1.2rem] leading-none  text-[#96969E] duration-200 hover:bg-[#292929] md:justify-start `}
 					href="/dashboard"
 					onClick={() => {
 						window.innerWidth < 768 ? setsideMenuOpen(false) : '';
@@ -73,7 +73,7 @@ const SideMenu = () => {
 				<Link
 					className={`${
 						sideMenuOpen ? 'flex' : 'hidden'
-					} w-full flex-row items-center justify-center gap-4 whitespace-nowrap px-8 py-5 text-[1.4rem] leading-none  text-[#96969E] duration-200 hover:bg-[#292929] md:justify-start`}
+					} w-full flex-row items-center justify-center gap-4 whitespace-nowrap px-8 py-5 text-[1.2rem] leading-none  text-[#96969E] duration-200 hover:bg-[#292929] md:justify-start`}
 					href="/dashboard/tasks"
 					onClick={() => {
 						window.innerWidth < 768 ? setsideMenuOpen(false) : '';
@@ -90,7 +90,24 @@ const SideMenu = () => {
 				<Link
 					className={`${
 						sideMenuOpen ? 'flex' : 'hidden'
-					} w-full flex-row items-center justify-center gap-4 whitespace-nowrap px-8 py-5 text-[1.4rem] leading-none  text-[#96969E] duration-200 hover:bg-[#292929] md:justify-start`}
+					} w-full flex-row items-center justify-center gap-4 whitespace-nowrap px-8 py-5 text-[1.2rem] leading-none  text-[#96969E] duration-200 hover:bg-[#292929] md:justify-start`}
+					href="/dashboard/profile"
+					onClick={() => {
+						window.innerWidth < 768 ? setsideMenuOpen(false) : '';
+					}}
+				>
+					<Image
+						src="/img/profile-icon.svg"
+						height={25}
+						width={25}
+						alt="guide-icon"
+					/>
+					Profile
+				</Link>
+				<Link
+					className={`${
+						sideMenuOpen ? 'flex' : 'hidden'
+					} w-full flex-row items-center justify-center gap-4 whitespace-nowrap px-8 py-5 text-[1.2rem] leading-none  text-[#96969E] duration-200 hover:bg-[#292929] md:justify-start`}
 					href="/dashboard/guide"
 					onClick={() => {
 						window.innerWidth < 768 ? setsideMenuOpen(false) : '';
@@ -107,7 +124,7 @@ const SideMenu = () => {
 				<Link
 					className={`${
 						sideMenuOpen ? 'flex' : 'hidden'
-					} w-full flex-row items-center justify-center gap-4 whitespace-nowrap px-8 py-5 text-[1.4rem] leading-none  text-[#96969E] duration-200 hover:bg-[#292929] md:justify-start`}
+					} w-full flex-row items-center justify-center gap-4 whitespace-nowrap px-8 py-5 text-[1.2rem] leading-none  text-[#96969E] duration-200 hover:bg-[#292929] md:justify-start`}
 					href="/dashboard/manage-users"
 					onClick={() => {
 						window.innerWidth < 768 ? setsideMenuOpen(false) : '';
@@ -124,7 +141,7 @@ const SideMenu = () => {
 				<button
 					className={`${
 						sideMenuOpen ? 'flex' : 'hidden'
-					} w-full flex-row items-center justify-center gap-4 whitespace-nowrap px-8 py-5 text-[1.4rem] leading-none  text-[#96969E] duration-200 hover:bg-[#292929] md:justify-start`}
+					} w-full flex-row items-center justify-center gap-4 whitespace-nowrap px-8 py-5 text-[1.2rem] leading-none  text-[#96969E] duration-200 hover:bg-[#292929] md:justify-start`}
 					onClick={() => {
 						signOut({ callbackUrl: '/' });
 					}}

@@ -1,10 +1,10 @@
 'use client';
 import type { Metadata } from 'next';
 import '../globals.css';
-import Header from '../components/header';
 
 import { redirect, usePathname } from 'next/navigation';
-import { getSession, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
+import Header from '../components/Header';
 
 export default function RootLayout({
 	children
