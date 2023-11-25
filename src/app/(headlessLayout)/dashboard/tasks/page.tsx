@@ -1,16 +1,7 @@
-// import {
-// 	Table,
-// 	TableBody,
-// 	TableCaption,
-// 	TableCell,
-// 	TableHead,
-// 	TableHeader,
-// 	TableRow
-// } from '@/components/ui/table';
 import { PrismaClient } from '@prisma/client';
 
 import { columns } from './columns';
-import { DataTable } from './data-table';
+import { DataTable } from '../../../components/data-table';
 
 const prisma = new PrismaClient();
 

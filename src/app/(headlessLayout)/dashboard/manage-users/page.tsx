@@ -1,19 +1,14 @@
-import { getServerAuthSession } from '@/server/auth';
-import { redirect } from 'next/navigation';
-import React from 'react';
+import { PrismaClient } from '@prisma/client';
 
-const DashboardPage = async () => {
-	// const status = await getServerAuthSession();
-	// console.log(status);
-	// if (!status) {
-	// 	// User unauthenticated, redirect to home
-	// 	redirect('/');
-	// }
-	return (
-		<div className=" flex items-center justify-center text-black">
-			<h1 className=" text-[3rem]">Manage users page</h1>
-		</div>
-	);
+import { columns } from './columns';
+import { DataTable } from '../../../components/data-table';
+
+const prisma = new PrismaClient();
+
+const ManageUsersPage = async () => {
+	const users = await prisma.user.findMany({});
+
+	return <DataTable columns={columns} data={users} />;
 };
 
-export default DashboardPage;
+export default ManageUsersPage;
