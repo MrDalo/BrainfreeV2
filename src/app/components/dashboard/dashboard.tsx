@@ -5,6 +5,8 @@ import DnDContext from './DnDContext';
 import DroppableTodoField from './DroppableTodoField';
 import { Task, TaskPriority } from '@prisma/client';
 import { resetServerContext } from 'react-beautiful-dnd';
+import { redirect } from 'next/navigation';
+import Link from 'next/link';
 
 const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 	const [todos, setTodos] = useState<Task[]>(tasks);
@@ -37,6 +39,15 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 
 	return (
 		<div className="w-[95%] max-w-[900px]">
+			<Link
+				href="/dashboard/guide"
+				className="fixed right-[1.5rem] top-[1.5rem] h-[3rem] w-[3rem] cursor-pointer rounded-[50%] border border-primary-green bg-primary-black text-center text-[1.9rem] text-primary-green transition duration-[400ms] hover:bg-primary-green hover:text-primary-black"
+			>
+				?
+			</Link>
+			<button className="fixed bottom-[1.5rem] right-[1.5rem] h-[3rem] w-[3rem] cursor-pointer rounded-[50%] border border-primary-green bg-primary-black pb-[0.2rem] text-[2rem] leading-[2rem] text-primary-green transition duration-[400ms] hover:bg-primary-green hover:text-primary-black">
+				+
+			</button>
 			<div className="flex w-full flex-col items-center justify-center gap-[4rem] p-[2rem]">
 				<div className="flex h-fit w-full items-center justify-between">
 					<div className="flex h-full w-[30%] flex-col items-center justify-center rounded-[1rem] bg-primary-green px-1 py-2">
@@ -129,6 +140,21 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 								)}
 							/>
 						</div>
+					</div>
+					<div className="relative h-[30vh] w-[95%] rounded-[1.5rem] bg-primary-black p-2">
+						<h2 className="tratext-center absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] text-[2.5rem] font-light leading-[2.5rem] text-white">
+							Assign
+						</h2>
+						<p className="absolute left-[50%] top-[-2.5rem] translate-x-[-50%] text-[1.5rem] font-light text-primary-green">
+							Unassigned
+						</p>
+						<DroppableTodoField
+							droppableId={TaskPriority.NOT_ASSIGNED}
+							droppableName="Assign"
+							todos={todos.filter(
+								x => x.priority === TaskPriority.NOT_ASSIGNED
+							)}
+						/>
 					</div>
 				</DnDContext>
 			</div>

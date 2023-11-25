@@ -3,9 +3,9 @@
 import priorityTexts from '@/app/priority-texts';
 import { Task } from '@prisma/client';
 
-const TodoView = ({ todo }: { todo: Task }) => {
+const TodoForm = ({ todo }: { todo: Task }) => {
 	return (
-		<div className="flex h-full w-full flex-col items-center justify-center font-normal">
+		<form className="flex h-full w-full flex-col items-center justify-center font-normal">
 			<h2 className="mb-[1.5rem] text-[2rem] font-light text-primary-green">
 				{todo.title}
 			</h2>
@@ -26,14 +26,24 @@ const TodoView = ({ todo }: { todo: Task }) => {
 				</div>
 				<div className="mb-[1rem] flex flex-row items-start justify-start px-2 text-[1rem] sm:justify-end">
 					<h3 className="mr-4 text-primary-green">Completed: </h3>
-					<p className="text-white"> {todo.completed ? '✅' : '❌'}</p>
+					<div className="checkbox-wrapper-18 mr-2">
+						<div className="round">
+							<input type="checkbox" id="checkbox-18" />
+							<label htmlFor="checkbox-18"></label>
+						</div>
+					</div>
 				</div>
 			</div>
-			<button className="w-fit rounded-[1rem] border border-primary-green px-8 py-1 text-[1.2rem] text-primary-green transition duration-[400ms] hover:bg-primary-green hover:text-primary-black">
-				Edit
-			</button>
-		</div>
+			<div className="flex items-center justify-center gap-[2rem]">
+				<button className="w-fit rounded-[1rem] border border-primary-green px-8 py-1 text-[1.2rem] text-primary-green transition duration-[400ms] hover:bg-primary-green hover:text-primary-black">
+					Delete
+				</button>
+				<button className="w-fit rounded-[1rem] border border-primary-green px-8 py-1 text-[1.2rem] text-primary-green transition duration-[400ms] hover:bg-primary-green hover:text-primary-black">
+					Save
+				</button>
+			</div>
+		</form>
 	);
 };
 
-export default TodoView;
+export default TodoForm;
