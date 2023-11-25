@@ -3,25 +3,75 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { signIn } from 'next-auth/react';
+import { redirect, useRouter } from 'next/navigation';
+import { useForm, SubmitHandler } from 'react-hook-form';
+
+type FormInputs = {
+	email: string;
+	password: string;
+};
 
 const SignInForm = () => {
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors }
+	} = useForm<FormInputs>();
+
+	const onSubmit: SubmitHandler<FormInputs> = async data => {
+		const status = await signIn('credentials', {
+			email: data.email,
+			password: data.password,
+			callbackUrl: 'http://localhost:3000/',
+			redirect: false
+		});
+		console.log(status);
+		if (status?.error) {
+			alert(status.error);
+		} else {
+			// redirect('/dashboard');
+			// const router = useRouter();
+			// router.push('/dashboard');
+		}
+	};
+
 	return (
 		<div className="  flex w-full flex-col flex-nowrap sm:w-2/3 md:w-full xl:w-2/3">
-			{/* <form action="" className="flex flex-col flex-nowrap items-center gap-4">
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				// onSubmit={e => {
+				// 	e.preventDefault();
+				// 	signIn('credentials', {
+				// 		// eMail: e.target.eMail.value,
+				// 		eMail: e.target.dispatchEvent.
+				// 		password: e.target.password.value,
+				// 		callbackUrl: 'http://localhost:3000/dashboard'
+				// 	})
+				// }}
+				className="flex flex-col flex-nowrap items-center gap-4"
+			>
 				<input
 					type="text"
 					placeholder="E-mail"
-					name="eMail"
+					{...register('email', { required: true, pattern: /^\S+@\S+$/i })}
 					required
 					className="w-2/3 border-b border-primary-black bg-transparent text-lg placeholder:text-primary-black focus:outline-none"
 				/>
+				{errors.email?.type === 'required' && (
+					<span>This field is required</span>
+				)}
+				{errors.email?.type === 'pattern' && (
+					<span>Add valid e-mail address</span>
+				)}
 				<input
 					type="password"
 					placeholder="Password"
-					name="password"
+					{...register('password', { required: true })}
 					required
 					className=" w-2/3 border-b border-primary-black bg-transparent text-lg placeholder:text-primary-black focus:outline-none"
 				/>
+				{errors.password && <span>This field is required</span>}
 				<button
 					type="submit"
 					className="mt-2 inline-block w-1/2 rounded-full bg-primary-black  py-[10px] text-center text-lg font-medium text-primary-green duration-100 hover:scale-105 lg:font-normal"
@@ -33,7 +83,7 @@ const SignInForm = () => {
 				<hr className="w-1/3 border-primary-black" />
 				<p>OR</p>
 				<hr className="w-1/3 border-primary-black" />
-			</div> */}
+			</div>
 			<div className="flex w-full flex-col flex-nowrap items-center gap-3">
 				<button
 					onClick={() =>

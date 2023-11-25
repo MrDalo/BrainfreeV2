@@ -7,7 +7,7 @@ import { signIn } from 'next-auth/react';
 const SignUpForm = () => {
 	return (
 		<div className="  flex w-full flex-col flex-nowrap sm:w-2/3 md:w-full xl:w-2/3">
-			{/* <form action="" className="flex flex-col flex-nowrap items-center gap-4">
+			<form action="" className="flex flex-col flex-nowrap items-center gap-4">
 				<input
 					type="text"
 					placeholder="Username"
@@ -47,7 +47,7 @@ const SignUpForm = () => {
 				<hr className="w-1/3 border-primary-black" />
 				<p>OR</p>
 				<hr className="w-1/3 border-primary-black" />
-			</div> */}
+			</div>
 			<div className="flex w-full flex-col flex-nowrap items-center gap-3">
 				<button
 					onClick={() =>

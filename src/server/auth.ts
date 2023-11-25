@@ -11,6 +11,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 
 import { db } from '@/server/db';
 import { Role } from '@prisma/client';
+import { DefaultJWT } from 'next-auth/jwt';
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -30,12 +31,20 @@ declare module 'next-auth' {
 	}
 }
 
+declare module 'next-auth/jwt' {
+	interface JWT extends DefaultJWT {
+		id: string;
+		role: Role;
+	}
+}
+
 /**
  * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.
  *
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
+	adapter: PrismaAdapter(db),
 	callbacks: {
 		session: ({ session, user }) => ({
 			...session,
@@ -44,9 +53,16 @@ export const authOptions: NextAuthOptions = {
 				id: user.id,
 				role: user.role
 			}
-		})
+		}),
+		jwt: ({ token, user }) => {
+			console.log('JWT', token, '///', user, '///////');
+			if (user) {
+				token.id = user.id;
+				token.role = user.role;
+			}
+			return token;
+		}
 	},
-	adapter: PrismaAdapter(db),
 	providers: [
 		DiscordProvider({
 			clientId: process.env.DISCORD_CLIENT_ID ?? '',
@@ -64,20 +80,20 @@ export const authOptions: NextAuthOptions = {
 			// e.g. domain, username, password, 2FA token, etc.
 			// You can pass any HTML attribute to the <input> tag through the object.
 			credentials: {
-				username: { label: 'Username', type: 'text', placeholder: 'your-name' },
-				password: { label: 'Password', type: 'password' }
+				email: { label: 'email', type: 'text', placeholder: 'your-name' },
+				password: { label: 'password', type: 'password' }
 			},
 			async authorize(credentials): Promise<any> {
 				// Add logic here to look up the user from the credentials supplied
 				const user = {
 					id: '1',
-					name: 'J Smith',
+					name: 'Smith',
 					email: 'jsmith@example.com',
 					password: 'password'
 				};
-
+				console.log('I AM HERE', credentials, user, 'I AM HERE');
 				if (
-					credentials?.username === user.name &&
+					credentials?.email === user.email &&
 					credentials?.password === user.password
 				) {
 					// Any object returned will be saved in `user` property of the JWT
@@ -103,6 +119,9 @@ export const authOptions: NextAuthOptions = {
 	pages: {
 		signIn: '/sign-in',
 		signOut: '/'
+	},
+	session: {
+		strategy: 'jwt'
 	}
 };
 
