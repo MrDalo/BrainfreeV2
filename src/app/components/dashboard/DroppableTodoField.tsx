@@ -8,12 +8,14 @@ const DroppableTodoField = ({
 	droppableId,
 	todos,
 	droppableName,
-	check
+	check,
+	update
 }: {
 	droppableId: string;
 	todos: Task[];
 	droppableName: string;
 	check: (todo: Task) => void;
+	update: () => void;
 }) => {
 	return (
 		<Droppable droppableId={droppableId}>
@@ -35,6 +37,7 @@ const DroppableTodoField = ({
 								todo={todo}
 								colums={droppableName === 'Assign'}
 								check={check}
+								update={update}
 							/>
 						))}
 						{provided.placeholder}

@@ -4,20 +4,21 @@ import { Draggable } from 'react-beautiful-dnd';
 import TodoFormScreen from './todoFormScreen';
 import { Task } from '@prisma/client';
 import { useState } from 'react';
-import Checkbox from '../checkbox';
 
 const DraggableTodo = ({
 	id,
 	index,
 	todo,
 	colums,
-	check
+	check,
+	update
 }: {
 	id: string;
 	index: number;
 	todo: Task;
 	colums: boolean;
 	check: (todo: Task) => void;
+	update: () => void;
 }) => {
 	const [openTodo, setOpenTodo] = useState<boolean>(false);
 
@@ -45,7 +46,9 @@ const DraggableTodo = ({
 					</div>
 				)}
 			</Draggable>
-			{openTodo && <TodoFormScreen todo={todo} open={setOpenTodo} />}
+			{openTodo && (
+				<TodoFormScreen todo={todo} open={setOpenTodo} update={update} />
+			)}
 		</>
 	);
 };

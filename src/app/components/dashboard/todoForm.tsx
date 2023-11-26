@@ -18,12 +18,14 @@ const TodoForm = ({
 	todo,
 	setEdit,
 	setOpen,
-	queryClient
+	queryClient,
+	update
 }: {
 	todo: Task;
 	setEdit: Dispatch<SetStateAction<boolean>>;
 	setOpen: Dispatch<SetStateAction<boolean>>;
 	queryClient: QueryClient;
+	update: () => void;
 }) => {
 	const {
 		register,
@@ -48,6 +50,7 @@ const TodoForm = ({
 			}),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ['taskInfo', { id }] });
+			update();
 			setEdit(false);
 		}
 	});
@@ -140,14 +143,14 @@ const TodoForm = ({
 			</div>
 			<div className="flex items-center justify-center gap-[2rem]">
 				<button
-					className="w-fit rounded-[1rem] border border-primary-green px-8 py-1 text-[1.2rem] text-primary-green transition duration-[400ms] hover:bg-primary-green hover:text-primary-black"
+					className="duration-[400ms] w-fit rounded-[1rem] border border-primary-green px-8 py-1 text-[1.2rem] text-primary-green transition hover:bg-primary-green hover:text-primary-black"
 					onClick={() => setEdit(false)}
 					disabled={mutation.isPending || mutationDelete.isPending}
 				>
 					Back
 				</button>
 				<button
-					className="w-fit rounded-[1rem] border border-primary-green px-8 py-1 text-[1.2rem] text-primary-green transition duration-[400ms] hover:bg-primary-green hover:text-primary-black"
+					className="duration-[400ms] w-fit rounded-[1rem] border border-primary-green px-8 py-1 text-[1.2rem] text-primary-green transition hover:bg-primary-green hover:text-primary-black"
 					disabled={mutation.isPending || mutationDelete.isPending}
 					onClick={() => mutationDelete.mutate()}
 				>
@@ -155,7 +158,7 @@ const TodoForm = ({
 				</button>
 				<input
 					type="submit"
-					className="w-fit rounded-[1rem] border border-primary-green px-8 py-1 text-[1.2rem] text-primary-green transition duration-[400ms] hover:bg-primary-green hover:text-primary-black"
+					className="duration-[400ms] w-fit rounded-[1rem] border border-primary-green px-8 py-1 text-[1.2rem] text-primary-green transition hover:bg-primary-green hover:text-primary-black"
 					disabled={mutation.isPending || mutationDelete.isPending}
 					value={mutation.isPending ? 'Saving...' : 'Save'}
 				></input>

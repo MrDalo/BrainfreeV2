@@ -9,10 +9,12 @@ import { useQueryClient } from '@tanstack/react-query';
 
 const TodoFormScreen = ({
 	todo,
-	open
+	open,
+	update
 }: {
 	todo: Task;
 	open: Dispatch<SetStateAction<boolean>>;
+	update: () => void;
 }) => {
 	const [edit, setEdit] = useState<boolean>(false);
 
@@ -39,6 +41,7 @@ const TodoFormScreen = ({
 						setEdit={setEdit}
 						setOpen={open}
 						queryClient={queryClient}
+						update={update}
 					/>
 				) : (
 					<TodoView todo={data.data as Task} setEdit={setEdit} />

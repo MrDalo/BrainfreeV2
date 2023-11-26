@@ -43,6 +43,7 @@ const TodoCreateForm = ({
 				body: JSON.stringify(newTodo)
 			}),
 		onSuccess: () => {
+			update();
 			setOpen(false);
 		}
 	});
@@ -53,11 +54,10 @@ const TodoCreateForm = ({
 		data.userId = 'clpe6af550002gtngs5nppg36';
 		console.log(data);
 		mutation.mutate(data);
-		update();
 	};
 
 	return (
-		<div className="fixed left-0 top-0 z-10 flex h-screen w-screen items-center justify-center bg-primary-black bg-opacity-75">
+		<div className="fixed left-0 top-0 z-20 flex h-screen w-screen items-center justify-center bg-primary-black bg-opacity-75">
 			<div className="relative flex w-[90%] max-w-[700px] flex-col items-center justify-center rounded-[1rem] border border-primary-green bg-primary-black p-[1.5rem] text-white">
 				<button
 					className="absolute right-0 top-0 z-20 cursor-pointer px-4 py-3 text-[1.5rem] font-bold leading-[1.5rem] text-primary-green transition duration-300 hover:text-red-400"
@@ -124,7 +124,7 @@ const TodoCreateForm = ({
 					<div className="flex items-center justify-center gap-[2rem]">
 						<input
 							type="submit"
-							className="w-fit rounded-[1rem] border border-primary-green px-8 py-1 text-[1.2rem] text-primary-green transition duration-[400ms] hover:bg-primary-green hover:text-primary-black"
+							className="duration-[400ms] w-fit rounded-[1rem] border border-primary-green px-8 py-1 text-[1.2rem] text-primary-green transition hover:bg-primary-green hover:text-primary-black"
 							disabled={mutation.isPending}
 							value={mutation.isPending ? 'Creating...' : 'Create'}
 						></input>
