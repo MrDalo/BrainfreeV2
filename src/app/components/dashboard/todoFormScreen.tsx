@@ -1,9 +1,11 @@
 'use client';
 
 import { Task } from '@prisma/client';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import TodoView from './todoView';
 import TodoForm from './todoForm';
+import { TaskQuery } from '../queries/taskQuery';
+import { useQueryClient } from '@tanstack/react-query';
 
 const TodoFormScreen = ({
 	todo,
@@ -12,6 +14,12 @@ const TodoFormScreen = ({
 	todo: Task;
 	open: Dispatch<SetStateAction<boolean>>;
 }) => {
+	const [edit, setEdit] = useState<boolean>(false);
+
+	const queryClient = useQueryClient();
+
+	const data = TaskQuery(todo.id ?? '');
+
 	return (
 		<div className="fixed left-0 top-0 z-10 flex h-screen w-screen items-center justify-center bg-primary-black bg-opacity-75">
 			<div className="relative flex w-[90%] max-w-[700px] flex-col items-center justify-center rounded-[1rem] border border-primary-green bg-primary-black p-[1.5rem] text-white">
@@ -21,7 +29,20 @@ const TodoFormScreen = ({
 				>
 					X
 				</button>
-				<TodoForm todo={todo} />
+				{data.isLoading ? (
+					<p>Loading...</p>
+				) : data.isError ? (
+					<p>Server error while loading...</p>
+				) : edit ? (
+					<TodoForm
+						todo={data.data as Task}
+						setEdit={setEdit}
+						setOpen={open}
+						queryClient={queryClient}
+					/>
+				) : (
+					<TodoView todo={data.data as Task} setEdit={setEdit} />
+				)}
 			</div>
 		</div>
 	);

@@ -7,9 +7,16 @@ import { Task, TaskPriority } from '@prisma/client';
 import { resetServerContext } from 'react-beautiful-dnd';
 import Link from 'next/link';
 import { useMutation } from '@tanstack/react-query';
+import Pannels from './pannels';
+import TodoCreateForm from './todoCreateForm';
+import { useSession } from 'next-auth/react';
+import { TasksQuery } from '../queries/tasksQuery';
 
 const Dashboard = ({ tasks }: { tasks: Task[] }) => {
+	const [isFetching, setIsFetching] = useState<boolean>(false);
 	const [todos, setTodos] = useState<Task[]>(tasks);
+	const { data: session } = useSession();
+	const updateTodos = TasksQuery(session?.user.id ?? '');
 
 	const [todosUncompleted, setTodosUncompleted] = useState<Task[]>(
 		tasks.filter(x => x.completed === false)
@@ -20,27 +27,56 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 
 	//console.log(todos);
 
-	const mutationPriority = useMutation({
-		mutationFn: (newPriority: { priority: TaskPriority; id: string }) =>
-			fetch(`/api/task/${newPriority.id}`, {
+	const mutation = useMutation({
+		mutationFn: (newTodo: {
+			priority: TaskPriority;
+			id: string;
+			completed: boolean;
+		}) =>
+			fetch(`/api/task/${newTodo.id}`, {
 				method: 'PUT',
-				body: JSON.stringify(newPriority)
-			})
+				body: JSON.stringify(newTodo)
+			}),
+		onError: error => {
+			console.log(error); //todo error handling
+		}
 	});
 
-	const mutationCompleted = useMutation({
-		mutationFn: (todoComplete: { completed: boolean; id: string }) =>
-			fetch(`/api/task/${todoComplete.id}`, {
-				method: 'PUT',
-				body: JSON.stringify(todoComplete)
-			})
+	const mutationUpdate = useMutation({
+		mutationFn: () =>
+			fetch(`/api/user/clpe6af550002gtngs5nppg36/task`, {
+				method: 'GET'
+			}),
+		onSuccess: data => {
+			const res = data.json().then(function (data) {
+				var aloha = JSON.parse(data);
+				console.log(aloha);
+			});
+
+			console.log(res);
+		}
 	});
+
+	const updateData = async () => {
+		//mutationUpdate.mutate();
+		/*setIsFetching(true);
+		const data = await fetch(`/api/user/clpe6af550002gtngs5nppg36/task`, {
+			method: 'GET'
+		});
+		const res = await data.json();
+
+		setTodos(await res);
+		console.log(todos);
+		setTodosUncompleted(todos.filter(x => x.completed === false));
+		console.log(todosUncompleted);
+		setIsFetching(false);*/
+	};
 
 	const todoComplete = (todo: Task) => {
 		todo.completed = true;
 		setTodos([...todos]);
 		setTodosUncompleted([...todos.filter(x => x.completed === false)]);
-		mutationCompleted.mutate(todo);
+		mutation.mutate(todo);
 	};
 
 	const handleDragAndDrop = (results: any) => {
@@ -54,58 +90,39 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 		)
 			return;
 
-		let pickedItem = todos.filter(x => x.priority === source.droppableId)[
-			source.index
-		];
-		//console.log(pickedItem);
+		let pickedItem = todosUncompleted.filter(
+			x => x.priority === source.droppableId
+		)[source.index];
+
+		console.log(source.droppableId);
+		console.log(source.index);
+		console.log(pickedItem);
 		pickedItem.priority = destination.droppableId;
-		//console.log(pickedItem);
+		console.log(pickedItem);
 		setTodos([...todos]);
-		mutationPriority.mutate(pickedItem);
+		mutation.mutate(pickedItem);
 	};
+
+	const [create, setCreate] = useState<boolean>(false);
 
 	return (
 		<div className="w-[95%] max-w-[900px]">
+			{create && <TodoCreateForm setOpen={setCreate} update={updateData} />}
 			<Link
 				href="/dashboard/guide"
-				className="fixed right-[1.5rem] top-[1.5rem] h-[3rem] w-[3rem] cursor-pointer rounded-[50%] border border-primary-green bg-primary-black text-center text-[1.9rem] text-primary-green transition duration-[400ms] hover:bg-primary-green hover:text-primary-black"
+				className="fixed right-[1.5rem] top-[1.5rem] z-10 h-[3rem] w-[3rem] cursor-pointer rounded-[50%] border border-primary-green bg-primary-black text-center text-[1.9rem] text-primary-green transition duration-[400ms] hover:bg-primary-green hover:text-primary-black"
 			>
 				?
 			</Link>
-			<button className="fixed bottom-[1.5rem] right-[1.5rem] h-[3rem] w-[3rem] cursor-pointer rounded-[50%] border border-primary-green bg-primary-black pb-[0.2rem] text-[2rem] leading-[2rem] text-primary-green transition duration-[400ms] hover:bg-primary-green hover:text-primary-black">
+			<button
+				className="fixed bottom-[1.5rem] right-[1.5rem] z-10 h-[3rem] w-[3rem] cursor-pointer rounded-[50%] border border-primary-green bg-primary-black pb-[0.2rem] text-[2rem] leading-[2rem] text-primary-green transition duration-[400ms] hover:bg-primary-green hover:text-primary-black"
+				onClick={() => setCreate(true)}
+			>
 				+
 			</button>
 			<div className="flex w-full flex-col items-center justify-center gap-[4rem] p-[2rem]">
-				<div className="flex h-fit w-full items-center justify-between">
-					<div className="flex h-full w-[30%] flex-col items-center justify-center rounded-[1rem] bg-primary-green px-1 py-2">
-						<h3 className="text-center text-[1.5rem] font-light">
-							Tasks to prioritize
-						</h3>
-						<p className="my-[-0.5rem] text-[2.5rem]">
-							{
-								todosUncompleted.filter(
-									x => x.priority === TaskPriority.NOT_ASSIGNED
-								).length
-							}
-						</p>
-					</div>
-					<div className="flex h-full w-[30%] flex-col items-center justify-center rounded-[1rem] bg-primary-black px-1 py-2 text-primary-green">
-						<h3 className="text-center text-[1.5rem] font-light">
-							Tasks to complete
-						</h3>
-						<p className="my-[-0.5rem] text-[2.5rem]">
-							{todosUncompleted.length}
-						</p>
-					</div>
-					<div className="flex h-full w-[30%] flex-col items-center justify-center rounded-[1rem] bg-primary-green px-1 py-2">
-						<h3 className="text-center text-[1.5rem] font-light">
-							Tasks completed
-						</h3>
-						<p className="my-[-0.5rem] text-[2.5rem]">
-							{todos.filter(x => x.completed === true).length}
-						</p>
-					</div>
-				</div>
+				{isFetching && <p>Loading...</p>}
+				<Pannels todos={todos} todosUncompleted={todosUncompleted} />
 				<DnDContext onDragEnd={handleDragAndDrop}>
 					<div className="grid w-[95%] grid-cols-2 gap-[1px] rounded-[1.5rem] bg-primary-green font-light text-white">
 						<div className="relative h-[30vh] w-full rounded-tl-[1.5rem] bg-primary-black p-2">
