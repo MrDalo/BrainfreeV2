@@ -1,12 +1,10 @@
-import { PrismaClient } from '@prisma/client';
+import { db } from "@/server/db";
 
 import { columns } from './columns';
 import { DataTable } from '../../../components/data-table';
 
-const prisma = new PrismaClient();
-
 const TasksPage = async () => {
-	const tasks = await prisma.task.findMany({
+	const tasks = await db.task.findMany({
 		where: {
 			userId: 'clpckoymo0000gf3hr4dqh059'
 		}
