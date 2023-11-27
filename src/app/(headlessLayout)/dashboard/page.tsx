@@ -1,15 +1,15 @@
 import Dashboard from '@/app/components/dashboard/dashboard';
 import React from 'react';
 
-import { PrismaClient } from '@prisma/client';
 import { getServerAuthSession } from '@/server/auth';
+import { db } from '@/server/db';
 
-const prisma = new PrismaClient();
+const prisma = db;
 
 const DashboardPage = async () => {
 	const status = await getServerAuthSession();
 	const tasks = await prisma.task.findMany({
-		where: { userId: 'clpckoymo0000gf3hr4dqh059' }
+		where: { userId: 'clpe6af550002gtngs5nppg36' }
 	});
 	const userId = status?.user?.id;
 	const users = await prisma.user.findMany();
