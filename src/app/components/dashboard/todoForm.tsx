@@ -5,6 +5,7 @@ import { Task, TaskPriority } from '@prisma/client';
 import { Dispatch, SetStateAction } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { QueryClient, useMutation } from '@tanstack/react-query';
+import { dateToLocalISO } from '@/app/date';
 
 type FormInputs = {
 	title: string;
@@ -66,8 +67,9 @@ const TodoForm = ({
 	});
 
 	const onSubmit: SubmitHandler<FormInputs> = data => {
+		// correct date format from input
+		data.deadline = new Date(data.deadline);
 		mutation.mutate(data);
-		console.log(data);
 	};
 
 	return (
@@ -124,7 +126,12 @@ const TodoForm = ({
 				<div className="mb-[1rem] flex flex-row items-start justify-start px-2 text-[1rem]">
 					<h3 className="mr-4 text-primary-green">Deadline: </h3>
 
-					<p className="text-white"> {todo.deadline.toLocaleString()}</p>
+					<input
+						className="rounded-[1rem] border border-primary-green bg-primary-black px-3 py-1 text-[1rem] text-white"
+						type="datetime-local"
+						defaultValue={dateToLocalISO(new Date(todo.deadline)).slice(0, 16)}
+						{...register('deadline')}
+					/>
 				</div>
 				<div className="mb-[1rem] flex flex-row items-start justify-start px-2 text-[1rem] sm:justify-end">
 					<h3 className="mr-4 text-primary-green">Completed: </h3>

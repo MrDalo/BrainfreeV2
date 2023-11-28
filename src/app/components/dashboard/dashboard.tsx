@@ -40,7 +40,8 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 
 	const updateData = async () => {
 		setIsFetching(true);
-		const data = await fetch(`/api/user/clpe6af550002gtngs5nppg36/task`, {
+		const userId = session?.user.id;
+		const data = await fetch(`/api/user/${userId}/task`, {
 			method: 'GET'
 		});
 		const res = await data.json();
@@ -90,12 +91,12 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 			{create && <TodoCreateForm setOpen={setCreate} update={updateData} />}
 			<Link
 				href="/dashboard/guide"
-				className="duration-[400ms] fixed right-[1.5rem] top-[1.5rem] z-10 h-[3rem] w-[3rem] cursor-pointer rounded-[50%] border border-primary-green bg-primary-black text-center text-[1.9rem] text-primary-green transition hover:bg-primary-green hover:text-primary-black"
+				className="duration-[400ms] fixed right-[1.5rem] top-[1.5rem] z-10 h-[3rem] w-[3rem] cursor-pointer rounded-[50%] border border-primary-green bg-primary-black pt-[0.1rem] text-center text-[1.9rem] text-primary-green transition hover:bg-primary-green hover:text-primary-black"
 			>
 				?
 			</Link>
 			<button
-				className="duration-[400ms] fixed bottom-[1.5rem] right-[1.5rem] z-10 h-[3rem] w-[3rem] cursor-pointer rounded-[50%] border border-primary-green bg-primary-black pb-[0.2rem] text-[2rem] leading-[2rem] text-primary-green transition hover:bg-primary-green hover:text-primary-black"
+				className="duration-[400ms] fixed bottom-[1.5rem] right-[1.5rem] z-10 h-[3rem] w-[3rem] cursor-pointer rounded-[50%] border border-primary-green bg-primary-black text-[2rem] leading-[2rem] text-primary-green transition hover:bg-primary-green hover:text-primary-black"
 				onClick={() => setCreate(true)}
 			>
 				+
@@ -107,7 +108,7 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 					<>
 						<Pannels todos={todos} todosUncompleted={todosUncompleted} />
 						<DnDContext onDragEnd={handleDragAndDrop}>
-							<div className="grid w-[95%] grid-cols-2 gap-[1px] rounded-[1.5rem] bg-primary-green font-light text-white">
+							<div className="grid w-[95%] grid-cols-2 gap-[1px] rounded-[2rem] bg-primary-green font-light text-white">
 								<div className="relative h-[30vh] w-full rounded-tl-[1.5rem] bg-primary-black p-2">
 									<h2 className="tratext-center absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] text-[2.5rem] font-light leading-[2.5rem] text-white">
 										Do
