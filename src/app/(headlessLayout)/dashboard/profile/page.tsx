@@ -21,6 +21,7 @@ const ProfilePage = () => {
 					name={session?.user.name ? session.user.name : ''}
 					email={session?.user.email ? session.user.email : ''}
 					role={session?.user.role ? session.user.role : ''}
+					isManageUsers={false}
 				/>
 			) : (
 				<ProfileInfo
