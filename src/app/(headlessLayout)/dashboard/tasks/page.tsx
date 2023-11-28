@@ -7,14 +7,12 @@ const TasksPage = async () => {
 
 	const tasks = await db.task.findMany({
 		where: {
-			// userId: status?.user?.id
-			userId: 'clpckoymo0000gf3hr4dqh059'
+			userId: status?.user?.id
 		}
 	});
 	console.log(tasks);
 
-	// const userId = status?.user?.id ?? '';
-	const userId = 'clpckoymo0000gf3hr4dqh059';
+	const userId = status?.user?.id ?? '';
 
 	return <TasksTable id={userId} tasks={tasks} />;
 };
