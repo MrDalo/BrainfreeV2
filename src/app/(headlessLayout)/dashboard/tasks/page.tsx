@@ -1,16 +1,22 @@
 import { db } from '@/server/db';
-
-import { columns } from './columns';
-import { DataTable } from '../../../components/data-table';
+import TasksTable from '@/app/components/dashboard/tasks/table';
+import { getServerAuthSession } from '@/server/auth';
 
 const TasksPage = async () => {
+	const status = await getServerAuthSession();
+
 	const tasks = await db.task.findMany({
 		where: {
-			userId: 'clpfgd7250000rksqa3ltz7l1'
+			// userId: status?.user?.id
+			userId: 'clpckoymo0000gf3hr4dqh059'
 		}
 	});
+	console.log(tasks);
 
-	return <DataTable columns={columns} data={tasks} />;
+	// const userId = status?.user?.id ?? '';
+	const userId = 'clpckoymo0000gf3hr4dqh059';
+
+	return <TasksTable id={userId} tasks={tasks} />;
 };
 
 export default TasksPage;

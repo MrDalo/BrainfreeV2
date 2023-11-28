@@ -1,12 +1,16 @@
-import { db } from "@/server/db";
-
-import { columns } from './columns';
-import { DataTable } from '../../../components/data-table';
+import { db } from '@/server/db';
+import { redirect } from 'next/navigation';
+import { getServerAuthSession } from '@/server/auth';
+import ManageUsersTable from '@/app/components/dashboard/manage-users/table';
 
 const ManageUsersPage = async () => {
-	const users = await db.user.findMany({});
+	const status = await getServerAuthSession();
+	if (status?.user?.role !== 'ADMIN') {
+		redirect('/dashboard');
+	}
 
-	return <DataTable columns={columns} data={users} />;
+	const users = await db.user.findMany({});
+	return <ManageUsersTable users={users} />;
 };
 
 export default ManageUsersPage;
