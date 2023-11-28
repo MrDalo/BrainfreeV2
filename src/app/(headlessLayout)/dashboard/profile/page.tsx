@@ -13,7 +13,7 @@ const ProfilePage = () => {
 	const userData = UserQuery(session?.user.id ?? '');
 
 	return (
-		<div className=" flex w-full flex-col items-center justify-center gap-6 text-black">
+		<div className=" flex w-full flex-col items-center justify-center gap-6  text-white">
 			<h1 className=" text-[3rem]">Profile</h1>
 			{inEditMode ? (
 				<ProfileForm

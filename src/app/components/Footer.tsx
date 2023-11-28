@@ -62,11 +62,11 @@ const Footer = () => {
 					viewBox="0 0 22 35"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
-					className=" animate-bounce cursor-pointer duration-150"
+					className=" animate-bounce cursor-pointer duration-1000"
 					onClick={onArrowClick}
 					initial={{ opacity: 0 }}
 					whileInView={{ opacity: 1 }}
-					transition={{ duration: 1.5 }}
+					transition={{ duration: 1.2 }}
 				>
 					<path
 						d="M11 34L11 1M11 1L1 11.1809M11 1L21 11.1809"

@@ -8,7 +8,7 @@ type Props = {
 
 const ProfileInfo = ({ name, email, role }: Props) => {
 	return (
-		<div className="flex flex-col items-start justify-start rounded-3xl bg-[#eee] px-12 py-8 shadow-lg">
+		<div className="flex flex-col items-start justify-start rounded-3xl bg-[#1a1a1a] px-12 py-8 shadow-lg">
 			<div className=" flex flex-row gap-4">
 				<p className=" text-[1.3rem]">User name:</p>
 				<p className=" text-[1.3rem]">{name}</p>

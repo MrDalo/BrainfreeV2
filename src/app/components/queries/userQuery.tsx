@@ -5,6 +5,7 @@ export const UserQuery = (id: string) =>
 		queryKey: ['userInfo', { id }],
 		queryFn: async () => {
 			const res = await fetch(`/api/user/${id}`);
+			// console.log('res: ', res.json());
 			return res.json();
 		}
 	});

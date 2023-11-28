@@ -18,8 +18,8 @@ const SideMenu = () => {
 			className={`fixed flex h-screen
 			${
 				sideMenuOpen
-					? 'left-0 bg-[#0e0e0e] md:fixed'
-					: 'left-[calc((70px-100vw))] bg-transparent md:fixed md:left-[-230px]'
+					? 'left-0 top-0 bg-[#0e0e0e] md:relative'
+					: 'left-[calc((70px-100vw))] bg-transparent md:absolute md:left-[-230px]'
 			}
 			 z-30 w-full flex-col flex-nowrap items-start justify-start py-6  duration-300 md:min-w-[300px] md:max-w-[300px]`}
 		>
@@ -45,7 +45,7 @@ const SideMenu = () => {
 					${
 						sideMenuOpen
 							? 'mr-3 bg-transparent'
-							: 'border border-primary-green bg-primary-black transition duration-[400ms] hover:bg-primary-green hover:text-primary-black'
+							: 'duration-[400ms] border border-primary-green bg-primary-black transition hover:bg-primary-green hover:text-primary-black'
 					}`}
 					onClick={() => setsideMenuOpen(!sideMenuOpen)}
 				>

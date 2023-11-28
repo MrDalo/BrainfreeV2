@@ -47,7 +47,7 @@ const ProfileForm = ({ id, name, email, role }: Props) => {
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
-			className="flex flex-col items-start justify-start gap-2 rounded-3xl bg-[#eee] px-12 py-8 shadow-lg"
+			className="flex flex-col items-start justify-start gap-2 rounded-3xl bg-[#1a1a1a] px-12 py-8 shadow-lg"
 		>
 			<div className=" flex flex-row gap-4">
 				<p className=" text-[1.3rem]">User name:</p>
@@ -56,7 +56,7 @@ const ProfileForm = ({ id, name, email, role }: Props) => {
 					<input
 						type="text"
 						defaultValue={data.data.name}
-						className="rounded-lg px-4 py-2"
+						className="rounded-lg px-4 py-2 text-black"
 						{...register('name', { required: true, maxLength: 60 })}
 						// {errors.name && <span>This field is required</span>}
 					/>
