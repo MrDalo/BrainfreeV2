@@ -34,7 +34,7 @@ const EditDialog = ({ user }: EditDialogProps) => {
 			<DialogTrigger asChild>
 				<Button variant="secondary">Edit</Button>
 			</DialogTrigger>
-			<DialogContent>
+			<DialogContent className="bg-[#292929]">
 				<DialogHeader>
 					<DialogTitle>Are you sure absolutely sure?</DialogTitle>
 					<DialogDescription>

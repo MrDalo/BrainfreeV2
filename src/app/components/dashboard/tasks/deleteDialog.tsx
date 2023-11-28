@@ -34,7 +34,7 @@ const DeleteDialog = ({ id }: Props) => {
 			<DialogTrigger asChild>
 				<Button variant="destructive">Delete</Button>
 			</DialogTrigger>
-			<DialogContent>
+			<DialogContent className="bg-[#292929]">
 				<DialogHeader>
 					<DialogTitle>Are you sure absolutely sure?</DialogTitle>
 					<DialogDescription>
