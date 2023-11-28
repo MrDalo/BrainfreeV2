@@ -32,7 +32,7 @@ const ProfilePage = () => {
 			)}
 
 			<button
-				className="rounded-2xl bg-[#b0f191] px-6 py-4 text-black duration-200 hover:scale-105"
+				className="rounded-xl bg-[#b0f191] px-4 py-2 text-black duration-200 hover:scale-105"
 				onClick={e => setInEditMode(!inEditMode)}
 			>
 				Edit profile
