@@ -22,7 +22,7 @@ export default async function RootLayout({
 		redirect('/sign-in');
 	}
 	return (
-		<main className=" overflow-none relative  flex h-screen w-full flex-row flex-nowrap items-start justify-start bg-[#fff]">
+		<main className=" overflow-none relative  flex h-screen w-full flex-row flex-nowrap items-start justify-start bg-[#000]">
 			<SideMenu />
 			<div className=" flex h-full w-full flex-col items-start justify-start overflow-auto bg-[#000] px-4 py-20 text-black md:px-8 lg:pr-12">
 				{children}

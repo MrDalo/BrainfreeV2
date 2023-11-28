@@ -53,8 +53,8 @@ export function DataTable<TData, TValue>({
 	});
 
 	return (
-		<div className="h-full overflow-auto bg-black">
-			<div className="flex items-center justify-center py-4 text-black">
+		<div className=" h-full overflow-auto bg-black">
+			<div className="flex items-center justify-center py-4 text-white">
 				<Input
 					placeholder="Filter ..."
 					value={globalFilter}
@@ -63,10 +63,10 @@ export function DataTable<TData, TValue>({
 				/>
 			</div>
 			<div className="rounded-md border">
-				<Table className="table-fixed">
-					<TableHeader >
+				<Table className="table-fixed pr-10">
+					<TableHeader>
 						{table.getHeaderGroups().map(headerGroup => (
-							<TableRow key={headerGroup.id}>
+							<TableRow key={headerGroup.id} className=" hover:bg-transparent">
 								{headerGroup.headers.map(header => {
 									return (
 										<TableHead key={header.id}>
@@ -88,9 +88,10 @@ export function DataTable<TData, TValue>({
 								<TableRow
 									key={row.id}
 									data-state={row.getIsSelected() && 'selected'}
+									className="hover:bg-[#1e1e1e]"
 								>
 									{row.getVisibleCells().map(cell => (
-										<TableCell key={cell.id}>
+										<TableCell key={cell.id} className="text-white">
 											{flexRender(
 												cell.column.columnDef.cell,
 												cell.getContext()
@@ -103,7 +104,7 @@ export function DataTable<TData, TValue>({
 							<TableRow>
 								<TableCell
 									colSpan={columns.length}
-									className="h-24 text-center"
+									className="h-24 text-center text-white"
 								>
 									No results.
 								</TableCell>
