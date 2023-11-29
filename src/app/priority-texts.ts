@@ -1,10 +1,10 @@
 import { TaskPriority } from "@prisma/client";
 
 const priorityTexts = {
-	[TaskPriority.URGENT_IMPORTANT]: 'Urgent important',
-	[TaskPriority.URGENT_NOT_IMPORTANT]: 'Urgent non important',
-	[TaskPriority.NOT_URGENT_IMPORTANT]: 'Non urgent important',
-	[TaskPriority.NOT_URGENT_NOT_IMPORTANT]: 'Non urgent non important',
+	[TaskPriority.URGENT_IMPORTANT]: 'Do',
+	[TaskPriority.URGENT_NOT_IMPORTANT]: 'Delegate',
+	[TaskPriority.NOT_URGENT_IMPORTANT]: 'Schedule',
+	[TaskPriority.NOT_URGENT_NOT_IMPORTANT]: 'Delete',
 	[TaskPriority.NOT_ASSIGNED]: 'Unassigned'
 };
 
