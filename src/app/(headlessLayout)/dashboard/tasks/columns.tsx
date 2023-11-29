@@ -8,6 +8,7 @@ import { XIcon, CheckIcon, ArrowUpDown } from 'lucide-react';
 
 import EditDialog from '@/app/components/dashboard/tasks/editDialog';
 import DeleteDialog from '@/app/components/dashboard/tasks/deleteDialog';
+import priorityTexts from '@/app/priority-texts';
 
 export const columns: ColumnDef<Task>[] = [
 	{
@@ -51,21 +52,8 @@ export const columns: ColumnDef<Task>[] = [
 			);
 		},
 		cell: ({ row }) => {
-			const priority: string = row.getValue('priority');
-			switch (priority) {
-				default:
-					return '';
-				case TaskPriority.URGENT_IMPORTANT:
-					return 'Do';
-				case TaskPriority.NOT_URGENT_IMPORTANT:
-					return 'Schedule';
-				case TaskPriority.URGENT_NOT_IMPORTANT:
-					return 'Delegate';
-				case TaskPriority.NOT_URGENT_NOT_IMPORTANT:
-					return 'Delete';
-				case TaskPriority.NOT_ASSIGNED:
-					return 'Not Assigned';
-			}
+			const priority: TaskPriority = row.getValue('priority');
+			return priorityTexts[priority];
 		}
 	},
 	{
@@ -82,9 +70,8 @@ export const columns: ColumnDef<Task>[] = [
 			);
 		},
 		cell: ({ row }) => {
-			const deadline: Date = row.getValue('deadline');
-			const deadlineString = deadline.toLocaleString();
-			return deadlineString;
+			const deadline: string = row.getValue('deadline');
+			return new Date(deadline).toLocaleDateString() + ' ' + new Date(deadline).toLocaleTimeString();
 		}
 	},
 	{
@@ -122,7 +109,6 @@ export const columns: ColumnDef<Task>[] = [
 					<DeleteDialog id={task.id} />
 				</div>
 			);
-
 		}
 	}
 ];
