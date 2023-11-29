@@ -2,27 +2,32 @@
 
 import { useState } from 'react';
 import DnDContext from './DnDContext';
-import DroppableTodoField from './DroppableTodoField';
 import { Task, TaskPriority } from '@prisma/client';
 import { resetServerContext } from 'react-beautiful-dnd';
 import Link from 'next/link';
 import { useMutation } from '@tanstack/react-query';
 import Pannels from './pannels';
-import TodoCreateForm from './todoCreateForm';
+import TodoCreateForm from './todoCreate';
 import { useSession } from 'next-auth/react';
+import DialogWrapper from './dialogWrapper';
+import { DialogFooter } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import DroppableTodoField from './droppableTodoField';
 
 const Dashboard = ({ tasks }: { tasks: Task[] }) => {
-	const [isFetching, setIsFetching] = useState<boolean>(false);
+	const [create, setCreate] = useState<boolean>(false);
 	const [todos, setTodos] = useState<Task[]>(tasks);
-	const { data: session } = useSession();
-
 	const [todosUncompleted, setTodosUncompleted] = useState<Task[]>(
 		tasks.filter(x => x.completed === false)
 	);
 
+	const { data: session } = useSession();
+
 	// Bug fix for react-beautiful-dnd
 	resetServerContext();
 
+	const [isError, setIsError] = useState<boolean>(false);
+	var errorMessage = 'Error updating tasks, we will return to last state.';
 	const mutation = useMutation({
 		mutationFn: (newTodo: {
 			priority: TaskPriority;
@@ -34,16 +39,27 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 				body: JSON.stringify(newTodo)
 			}),
 		onError: error => {
-			console.log(error); //todo error handling
+			//console.log(error);
+			errorMessage = 'Error updating tasks, we will return to last state.';
+			setIsError(true);
+			updateData();
 		}
 	});
 
+	// update tasks in dashboard
+	const [isFetching, setIsFetching] = useState<boolean>(false);
 	const updateData = async () => {
 		setIsFetching(true);
 		const userId = session?.user.id;
 		const data = await fetch(`/api/user/${userId}/task`, {
 			method: 'GET'
 		});
+		if (!data.ok) {
+			setIsError(true);
+			setIsFetching(false);
+			updateData();
+			return;
+		}
 		const res = await data.json();
 		const loadedTodos: Task[] = await res;
 
@@ -52,6 +68,7 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 		setIsFetching(false);
 	};
 
+	// todo is completed
 	const todoComplete = (todo: Task) => {
 		todo.completed = true;
 		setTodos([...todos]);
@@ -80,11 +97,29 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 		mutation.mutate(pickedItem);
 	};
 
-	const [create, setCreate] = useState<boolean>(false);
-
 	return (
 		<div className="w-[95%] max-w-[900px]">
-			{create && <TodoCreateForm setOpen={setCreate} update={updateData} />}
+			{create && (
+				<DialogWrapper title="" open={create} setOpen={setCreate}>
+					<TodoCreateForm setOpen={setCreate} update={updateData} />
+				</DialogWrapper>
+			)}
+			{isError && (
+				<DialogWrapper title="Error" open={isError} setOpen={setIsError}>
+					<p className="py-4">{errorMessage}</p>
+					<DialogFooter className="sm:justify-center">
+						<Button
+							type="button"
+							variant="secondary"
+							onClick={() => {
+								setIsError(false);
+							}}
+						>
+							Ok
+						</Button>
+					</DialogFooter>
+				</DialogWrapper>
+			)}
 			<Link
 				href="/dashboard/guide"
 				className="duration-[400ms] fixed right-[1.5rem] top-[1.5rem] z-10 h-[3rem] w-[3rem] cursor-pointer rounded-[50%] border border-primary-green bg-primary-black pt-[0.1rem] text-center text-[1.9rem] text-primary-green transition hover:bg-primary-green hover:text-primary-black"
@@ -104,12 +139,12 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 					<>
 						<Pannels todos={todos} todosUncompleted={todosUncompleted} />
 						<DnDContext onDragEnd={handleDragAndDrop}>
-							<div className="grid w-[95%] grid-cols-2 gap-[1px] rounded-[2rem] bg-primary-green font-light text-white">
-								<div className="relative h-[30vh] w-full rounded-tl-[1.5rem] bg-primary-black p-2">
+							<div className="grid w-[95%] grid-cols-1 gap-[1px] rounded-[2rem] bg-primary-green font-light text-white md:grid-cols-2">
+								<div className="relative h-[30vh] w-full rounded-tl-[1.5rem] rounded-tr-[1.5rem] bg-primary-black p-2 md:rounded-tr-none">
 									<h2 className="tratext-center absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] text-[2.5rem] font-light leading-[2.5rem] text-white">
 										Do
 									</h2>
-									<p className="absolute left-[50%] top-[-2.5rem] translate-x-[-50%] text-[1.5rem] font-light text-primary-green">
+									<p className="absolute right-[-1.5rem] top-[50%] translate-x-[50%] translate-y-[-50%] rotate-90 text-[1.5rem] font-light text-primary-green md:left-[50%] md:right-auto md:top-[-2.5rem] md:translate-x-[-50%] md:translate-y-0 md:rotate-0">
 										Urgent
 									</p>
 									<p className="absolute left-[-1.5rem] top-[50%] translate-x-[-50%] translate-y-[-50%] -rotate-90 text-[1.5rem] font-light text-primary-green">
@@ -125,12 +160,15 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 										update={updateData}
 									/>
 								</div>
-								<div className="relative h-[30vh] w-full rounded-tr-[1.5rem] bg-primary-black p-2">
+								<div className="relative h-[30vh] w-full bg-primary-black p-2 md:rounded-tr-[1.5rem]">
 									<h2 className="tratext-center absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] text-[2.5rem] font-light leading-[2.5rem] text-white">
 										Schedule
 									</h2>
-									<p className="absolute left-[50%] top-[-2.5rem] translate-x-[-50%] text-[1.5rem] font-light text-primary-green">
+									<p className="absolute right-[-1.5rem] top-[50%] translate-x-[50%] translate-y-[-50%] rotate-90 text-[1.5rem] font-light text-primary-green md:left-[50%] md:right-auto md:top-[-2.5rem] md:translate-x-[-50%] md:translate-y-0 md:rotate-0">
 										Non urgent
+									</p>
+									<p className="absolute left-[-1.5rem] top-[50%] translate-x-[-50%] translate-y-[-50%] -rotate-90 text-[1.5rem] font-light text-primary-green md:hidden">
+										Important
 									</p>
 									<DroppableTodoField
 										droppableId={TaskPriority.NOT_URGENT_IMPORTANT}
@@ -142,10 +180,13 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 										update={updateData}
 									/>
 								</div>
-								<div className="relative h-[30vh] w-full rounded-bl-[1.5rem] bg-primary-black p-2">
+								<div className="relative h-[30vh] w-full bg-primary-black p-2 md:rounded-bl-[1.5rem]">
 									<h2 className="tratext-center absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] text-[2.5rem] font-light leading-[2.5rem] text-white">
 										Delegate
 									</h2>
+									<p className="absolute right-[-1.5rem] top-[50%] translate-x-[50%] translate-y-[-50%] rotate-90 text-[1.5rem] font-light text-primary-green md:left-[50%] md:right-auto md:top-[-2.5rem] md:hidden md:translate-x-[-50%] md:translate-y-0 md:rotate-0">
+										Urgent
+									</p>
 									<p className="absolute left-[-1.5rem] top-[50%] translate-x-[-50%] translate-y-[-50%] -rotate-90 text-[1.5rem] font-light text-primary-green">
 										Non important
 									</p>
@@ -159,10 +200,16 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 										update={updateData}
 									/>
 								</div>
-								<div className="relative h-[30vh] w-full rounded-br-[1.5rem] bg-primary-black p-2">
+								<div className="relative h-[30vh] w-full rounded-bl-[1.5rem] rounded-br-[1.5rem] bg-primary-black p-2 md:rounded-bl-none">
 									<h2 className="tratext-center absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] text-[2.5rem] font-light leading-[2.5rem] text-white">
 										Delete
 									</h2>
+									<p className="absolute right-[-1.5rem] top-[50%] translate-x-[50%] translate-y-[-50%] rotate-90 text-[1.5rem] font-light text-primary-green md:left-[50%] md:right-auto md:top-[-2.5rem] md:hidden md:translate-x-[-50%] md:translate-y-0 md:rotate-0">
+										Non urgent
+									</p>
+									<p className="absolute left-[-1.5rem] top-[50%] translate-x-[-50%] translate-y-[-50%] -rotate-90 text-[1.5rem] font-light text-primary-green md:hidden">
+										Non important
+									</p>
 									<DroppableTodoField
 										droppableId={TaskPriority.NOT_URGENT_NOT_IMPORTANT}
 										droppableName="Eliminate"

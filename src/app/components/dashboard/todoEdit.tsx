@@ -115,7 +115,7 @@ const TodoForm = ({
 						{priorityTexts[TaskPriority.URGENT_NOT_IMPORTANT]}
 					</option>
 					<option value={TaskPriority.NOT_URGENT_NOT_IMPORTANT}>
-						{TaskPriority.NOT_URGENT_NOT_IMPORTANT}
+						{priorityTexts[TaskPriority.NOT_URGENT_NOT_IMPORTANT]}
 					</option>
 					<option value={TaskPriority.NOT_ASSIGNED}>
 						{priorityTexts[TaskPriority.NOT_ASSIGNED]}
@@ -130,7 +130,7 @@ const TodoForm = ({
 						className="rounded-[1rem] border border-primary-green bg-primary-black px-3 py-1 text-[1rem] text-white"
 						type="datetime-local"
 						defaultValue={dateToLocalISO(new Date(todo.deadline)).slice(0, 16)}
-						{...register('deadline')}
+						{...register('deadline', { required: true })}
 					/>
 				</div>
 				<div className="mb-[1rem] flex flex-row items-start justify-start px-2 text-[1rem] sm:justify-end">
@@ -148,9 +148,9 @@ const TodoForm = ({
 					</div>
 				</div>
 			</div>
-			<div className="flex items-center justify-center gap-[2rem]">
+			<div className="flex items-center justify-center gap-2 sm:gap-[2rem]">
 				<button
-					className="duration-[400ms] w-fit rounded-[1rem] border border-primary-green px-8 py-1 text-[1.2rem] text-primary-green transition hover:bg-primary-green hover:text-primary-black"
+					className="duration-[400ms] w-fit rounded-[1rem] border border-primary-green px-4 py-1 text-[1.2rem] text-primary-green transition hover:bg-primary-green hover:text-primary-black sm:px-8"
 					onClick={() => setEdit(false)}
 					disabled={mutation.isPending || mutationDelete.isPending}
 				>

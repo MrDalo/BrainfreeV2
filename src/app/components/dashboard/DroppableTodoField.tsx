@@ -1,7 +1,7 @@
 'use client';
 
 import { Droppable } from 'react-beautiful-dnd';
-import DraggableTodo from './DraggableTodo';
+import DraggableTodo from './draggableTodo';
 import { Task } from '@prisma/client';
 
 const DroppableTodoField = ({
@@ -27,7 +27,11 @@ const DroppableTodoField = ({
 				>
 					<div
 						className={`scrollbar flex h-max max-h-full w-full items-start justify-start gap-2 overflow-y-auto overflow-x-hidden px-4 py-1
-					${droppableName === 'Assign' ? 'flex-row flex-wrap' : 'flex-col'}`}
+					${
+						droppableName === 'Assign'
+							? 'flex-col md:flex-row md:flex-wrap'
+							: 'flex-col'
+					}`}
 					>
 						{todos.map((todo, todoIndex) => (
 							<DraggableTodo
