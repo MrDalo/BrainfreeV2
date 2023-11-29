@@ -10,7 +10,6 @@ const TasksPage = async () => {
 			userId: status?.user?.id
 		}
 	});
-	console.log(tasks);
 
 	const userId = status?.user?.id ?? '';
 

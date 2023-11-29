@@ -14,11 +14,6 @@ const DashboardPage = async () => {
 		where: { userId: userId }
 	});
 
-	//const users = await prisma.user.findMany();
-
-	// console.log(tasks);
-	// console.log(userId);
-	// console.log(users);
 	return (
 		<div className=" flex w-full flex-col items-center justify-center gap-6  text-white">
 			<Dashboard tasks={tasks} />

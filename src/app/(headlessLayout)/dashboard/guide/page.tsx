@@ -1,15 +1,7 @@
-import { getServerAuthSession } from '@/server/auth';
-import { redirect } from 'next/navigation';
 import React from 'react';
 import Image from 'next/image';
 
 const DashboardPage = async () => {
-	// const status = await getServerAuthSession();
-	// console.log(status);
-	// if (!status) {
-	// 	// User unauthenticated, redirect to home
-	// 	redirect('/');
-	// }
 	return (
 		<div className=" flex flex-col items-center justify-center text-white">
 			<h1 className=" text-[3rem] font-bold">Guide</h1>

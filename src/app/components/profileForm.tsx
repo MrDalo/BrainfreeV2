@@ -45,12 +45,10 @@ const ProfileForm = ({ id, name, email, role, isManageUsers }: Props) => {
 	});
 
 	const onSubmit: SubmitHandler<FormInputs> = data => {
-		// console.log(data);
 		mutation.mutate(data);
 	};
 
 	const data = UserQuery(id ?? '');
-	// console.log('data: ', data.data);
 
 	return (
 		<form

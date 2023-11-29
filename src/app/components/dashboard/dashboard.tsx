@@ -45,14 +45,10 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 			method: 'GET'
 		});
 		const res = await data.json();
-		//console.log(res);
 		const loadedTodos: Task[] = await res;
-		//console.log(loadedTodos.filter(x => x.completed === false));
 
 		setTodos(await loadedTodos);
-		//console.log(todos);
 		setTodosUncompleted(await loadedTodos.filter(x => x.completed === false));
-		//console.log(todosUncompleted);
 		setIsFetching(false);
 	};
 

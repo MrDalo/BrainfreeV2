@@ -14,8 +14,6 @@ export default function RootLayout({
 	const { data } = useSession();
 	const pathname = usePathname();
 
-	// console.log(data);
-
 	if (data && (pathname === '/sign-in' || pathname === '/sign-up')) {
 		redirect('/dashboard');
 	}
