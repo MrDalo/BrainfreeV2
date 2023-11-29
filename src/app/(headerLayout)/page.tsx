@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import IntroSection from '../components/intro-section';
-import MatrixSection from '../components/matrix-section';
+import IntroSection from '../components/introSection';
+import MatrixSection from '../components/matrixSection';
 import Footer from '../components/footer';
 
 export default function Home() {

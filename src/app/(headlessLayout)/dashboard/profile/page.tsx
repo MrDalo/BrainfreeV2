@@ -1,5 +1,5 @@
 'use client';
-import ProfileForm from '@/app/components/profile-form';
+import ProfileForm from '@/app/components/profileForm';
 import ProfileInfo from '@/app/components/profile-info';
 import { UserQuery } from '@/app/components/queries/userQuery';
 import { useSession } from 'next-auth/react';
@@ -21,17 +21,18 @@ const ProfilePage = () => {
 					name={session?.user.name ? session.user.name : ''}
 					email={session?.user.email ? session.user.email : ''}
 					role={session?.user.role ? session.user.role : ''}
+					isManageUsers={false}
 				/>
 			) : (
 				<ProfileInfo
 					name={userData?.data ? userData.data.name : 'Loading....'}
 					email={session?.user.email ? session.user.email : 'Loading....'}
-					role={session?.user.role ? session.user.role : 'Loading....'}
+					role={userData?.data ? userData.data.role : 'Loading....'}
 				/>
 			)}
 
 			<button
-				className="rounded-2xl bg-[#b0f191] px-6 py-4 text-black duration-200 hover:scale-105"
+				className="rounded-xl bg-[#b0f191] px-4 py-2 text-black duration-200 hover:scale-105"
 				onClick={e => setInEditMode(!inEditMode)}
 			>
 				Edit profile
