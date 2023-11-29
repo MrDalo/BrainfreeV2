@@ -9,12 +9,13 @@ type Props = {
 	id?: string;
 	name?: string;
 	email?: string;
-	role?: string;
+	role?: 'ADMIN' | 'USER';
 	isManageUsers?: boolean;
 };
 
 type FormInputs = {
 	name: string;
+	role: 'ADMIN' | 'USER';
 };
 
 const ProfileForm = ({ id, name, email, role, isManageUsers }: Props) => {
@@ -23,15 +24,19 @@ const ProfileForm = ({ id, name, email, role, isManageUsers }: Props) => {
 		handleSubmit,
 		watch,
 		formState: { errors }
-	} = useForm<FormInputs>();
+	} = useForm<FormInputs>({
+		defaultValues: {
+			role: role
+		}
+	});
 
 	const queryClient = useQueryClient();
 
 	const mutation = useMutation({
-		mutationFn: (newUserName: { name: string }) =>
+		mutationFn: (data: FormInputs) =>
 			fetch(`/api/user/${id}`, {
 				method: 'PUT',
-				body: JSON.stringify(newUserName)
+				body: JSON.stringify(data)
 			}),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ['userInfo', { id }] });
@@ -78,36 +83,31 @@ const ProfileForm = ({ id, name, email, role, isManageUsers }: Props) => {
 				)}
 			</div>
 			<div className=" flex flex-row gap-4">
-				<p
-					className={` ${
-						isManageUsers ? 'text-[1rem]' : 'text-[1.3rem]'
-					} align-middle`}
-				>
+				<p className={` ${isManageUsers ? 'text-[1rem]' : 'text-[1.3rem]'}`}>
 					E-mail:
 				</p>
-				<p
-					className={` ${
-						isManageUsers ? 'text-[1rem]' : 'text-[1.3rem]'
-					} align-middle`}
-				>
+				<p className={` ${isManageUsers ? 'text-[1rem]' : 'text-[1.3rem]'}`}>
 					{email}
 				</p>
 			</div>
 			<div className=" flex flex-row gap-4">
-				<p
-					className={` ${
-						isManageUsers ? 'text-[1rem]' : 'text-[1.3rem]'
-					} align-middle`}
-				>
+				<p className={` ${isManageUsers ? 'text-[1rem]' : 'text-[1.3rem]'}`}>
 					Role:
 				</p>
-				<p
-					className={` ${
-						isManageUsers ? 'text-[1rem]' : 'text-[1.3rem]'
-					} align-middle`}
-				>
-					{role}
-				</p>
+				{isManageUsers ? (
+					<select
+						id="role"
+						{...register('role')}
+						className=" rounded-md px-2 py-1 text-black"
+					>
+						<option value="USER">User</option>
+						<option value="ADMIN">Admin</option>
+					</select>
+				) : (
+					<p className={` ${isManageUsers ? 'text-[1rem]' : 'text-[1.3rem]'}`}>
+						{role}
+					</p>
+				)}
 			</div>
 
 			{isManageUsers ? (

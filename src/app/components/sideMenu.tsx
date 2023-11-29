@@ -3,10 +3,12 @@ import Link from 'next/link';
 import React, { useEffect } from 'react';
 import Image from 'next/image';
 import { useState } from 'react';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 const SideMenu = () => {
 	const [sideMenuOpen, setsideMenuOpen] = useState(false);
+
+	const { data } = useSession();
 
 	useEffect(() => {
 		if (window.innerWidth > 768) {
@@ -134,23 +136,28 @@ const SideMenu = () => {
 					/>
 					Guide
 				</Link>
-				<Link
-					className={`${
-						sideMenuOpen ? 'flex' : 'hidden'
-					} w-full flex-row items-center justify-center gap-4 whitespace-nowrap px-8 py-5 text-[1.2rem] leading-none  text-[#96969E] duration-200 hover:bg-[#292929] md:justify-start`}
-					href="/dashboard/manage-users"
-					onClick={() => {
-						window.innerWidth < 768 ? setsideMenuOpen(false) : '';
-					}}
-				>
-					<Image
-						src="/img/manage-users-icon.svg"
-						height={25}
-						width={25}
-						alt="manage-users-icon"
-					/>
-					Manage users
-				</Link>
+
+				{data?.user?.role === 'ADMIN' ? (
+					<Link
+						className={`${
+							sideMenuOpen ? 'flex' : 'hidden'
+						} w-full flex-row items-center justify-center gap-4 whitespace-nowrap px-8 py-5 text-[1.2rem] leading-none  text-[#96969E] duration-200 hover:bg-[#292929] md:justify-start`}
+						href="/dashboard/manage-users"
+						onClick={() => {
+							window.innerWidth < 768 ? setsideMenuOpen(false) : '';
+						}}
+					>
+						<Image
+							src="/img/manage-users-icon.svg"
+							height={25}
+							width={25}
+							alt="manage-users-icon"
+						/>
+						Manage users
+					</Link>
+				) : (
+					''
+				)}
 				<button
 					className={`${
 						sideMenuOpen ? 'flex' : 'hidden'

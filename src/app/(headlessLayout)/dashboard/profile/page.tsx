@@ -1,5 +1,5 @@
 'use client';
-import ProfileForm from '@/app/components/profile-form';
+import ProfileForm from '@/app/components/profileForm';
 import ProfileInfo from '@/app/components/profile-info';
 import { UserQuery } from '@/app/components/queries/userQuery';
 import { useSession } from 'next-auth/react';
@@ -27,7 +27,7 @@ const ProfilePage = () => {
 				<ProfileInfo
 					name={userData?.data ? userData.data.name : 'Loading....'}
 					email={session?.user.email ? session.user.email : 'Loading....'}
-					role={session?.user.role ? session.user.role : 'Loading....'}
+					role={userData?.data ? userData.data.role : 'Loading....'}
 				/>
 			)}
 

@@ -3,7 +3,7 @@ import React from 'react';
 import { UsersQuery } from '../../queries/usersQuery';
 import { User } from '@prisma/client';
 import { columns } from '@/app/(headlessLayout)/dashboard/manage-users/columns';
-import { DataTable } from '../../data-table';
+import { DataTable } from '../../dataTable';
 
 type Props = {
 	users: User[];

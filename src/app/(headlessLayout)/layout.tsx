@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
-import { andersonGrotesk } from '../font';
 import '../globals.css';
-import SideMenu from '@/app/components/side-menu';
+import SideMenu from '@/app/components/sideMenu';
 import { getServerAuthSession } from '@/server/auth';
 import { redirect } from 'next/navigation';
 
@@ -16,9 +15,7 @@ export default async function RootLayout({
 	children: React.ReactNode;
 }) {
 	const status = await getServerAuthSession();
-	// console.log(status);
 	if (!status) {
-		// User unauthenticated, redirect to home
 		redirect('/sign-in');
 	}
 	return (

@@ -12,7 +12,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { User } from '@prisma/client';
-import ProfileForm from '../../profile-form';
+import ProfileForm from '../../profileForm';
 
 type EditDialogProps = { user: User };
 

@@ -2,7 +2,7 @@
 import React from 'react';
 import { Task } from '@prisma/client';
 import { columns } from '@/app/(headlessLayout)/dashboard/tasks/columns';
-import { DataTable } from '../../data-table';
+import { DataTable } from '../../dataTable';
 import { TasksQuery } from '../../queries/tasksQuery';
 
 type Props = {
