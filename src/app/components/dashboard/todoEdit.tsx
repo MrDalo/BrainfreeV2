@@ -6,6 +6,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { QueryClient, useMutation } from '@tanstack/react-query';
 import { dateToLocalISO } from '@/app/date';
+import { Button } from '@/components/ui/button';
 
 type FormInputs = {
 	title: string;
@@ -149,26 +150,31 @@ const TodoForm = ({
 				</div>
 			</div>
 			<div className="flex items-center justify-center gap-2 sm:gap-[2rem]">
-				<button
-					className="duration-[400ms] w-fit rounded-[1rem] border border-primary-green px-4 py-1 text-[1.2rem] text-primary-green transition hover:bg-primary-green hover:text-primary-black sm:px-8"
-					onClick={() => setEdit(false)}
+				<Button
+					variant="secondary"
 					disabled={mutation.isPending || mutationDelete.isPending}
+					onClick={() => setEdit(false)}
 				>
 					Back
-				</button>
-				<button
-					className="duration-[400ms] w-fit rounded-[1rem] border border-primary-green px-8 py-1 text-[1.2rem] text-primary-green transition hover:bg-primary-green hover:text-primary-black"
+				</Button>
+				<Button
+					variant="destructive"
+					type="submit"
 					disabled={mutation.isPending || mutationDelete.isPending}
 					onClick={() => mutationDelete.mutate()}
 				>
 					{mutationDelete.isPending ? 'Deleting...' : 'Delete'}
-				</button>
-				<input
+				</Button>
+
+				{/* TODO: style - ako pri edit userovi -> zeleny button */}
+				<Button
+					variant="secondary"
 					type="submit"
-					className="duration-[400ms] w-fit rounded-[1rem] border border-primary-green px-8 py-1 text-[1.2rem] text-primary-green transition hover:bg-primary-green hover:text-primary-black"
 					disabled={mutation.isPending || mutationDelete.isPending}
-					value={mutation.isPending ? 'Saving...' : 'Save'}
-				></input>
+					onClick={() => setEdit(false)}
+				>
+					{mutation.isPending ? 'Saving...' : 'Save'}
+				</Button>
 			</div>
 		</form>
 	);

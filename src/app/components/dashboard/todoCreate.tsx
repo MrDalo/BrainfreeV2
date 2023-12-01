@@ -2,6 +2,7 @@
 
 import { dateToLocalISO } from '@/app/date';
 import priorityTexts from '@/app/priority-texts';
+import { Button } from '@/components/ui/button';
 import { TaskPriority } from '@prisma/client';
 import { useMutation } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
@@ -124,12 +125,11 @@ const TodoCreateForm = ({
 				</div>
 
 				<div className="flex items-center justify-center gap-[2rem]">
-					<input
-						type="submit"
-						className="duration-[400ms] w-fit rounded-[1rem] border border-primary-green px-8 py-1 text-[1.2rem] text-primary-green transition hover:bg-primary-green hover:text-primary-black"
-						disabled={mutation.isPending}
-						value={mutation.isPending ? 'Creating...' : 'Create'}
-					></input>
+					{/* TODO: jednotny style */}
+					{/* className="duration-[400ms] w-fit rounded-[1rem] border border-primary-green px-8 py-1 text-[1.2rem] text-primary-green transition hover:bg-primary-green hover:text-primary-black" */}
+					<Button type="submit" disabled={mutation.isPending}>
+						{mutation.isPending ? 'Creating...' : 'Create'}
+					</Button>
 				</div>
 			</form>
 		</>

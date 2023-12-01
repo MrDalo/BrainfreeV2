@@ -1,6 +1,7 @@
 'use client';
 
 import priorityTexts from '@/app/priority-texts';
+import { Button } from '@/components/ui/button';
 import { Task } from '@prisma/client';
 import { Dispatch, SetStateAction } from 'react';
 
@@ -38,12 +39,13 @@ const TodoView = ({
 					<p className="text-white">{todo.completed ? '✅' : '❌'}</p>
 				</div>
 			</div>
-			<button
-				className="duration-[400ms] w-fit rounded-[1rem] border border-primary-green px-8 py-1 text-[1.2rem] text-primary-green transition hover:bg-primary-green hover:text-primary-black"
-				onClick={() => setEdit(true)}
-			>
-				Edit
-			</button>
+			{/* TODO: style - ako pri edit userovi -> zeleny button */}
+			<Button
+					variant="secondary"
+					onClick={() => setEdit(true)}
+				>
+					Edit
+			</Button>
 		</div>
 	);
 };
