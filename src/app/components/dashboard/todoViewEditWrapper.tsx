@@ -35,6 +35,7 @@ const TodoViewEditWrapper = ({
 					setOpen={open}
 					queryClient={queryClient}
 					update={update}
+					fromList={false}
 				/>
 			) : (
 				<TodoView todo={data.data as Task} setEdit={setEdit} />

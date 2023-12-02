@@ -37,8 +37,10 @@ const DeleteDialog = ({ id }: Props) => {
 			</DialogTrigger>
 			<DialogContent className="bg-[#292929]">
 				<DialogHeader>
-					<DialogTitle>Are you sure absolutely sure?</DialogTitle>
-					<DialogDescription>
+					<DialogTitle className="text-red-600">
+						Are you sure absolutely sure?
+					</DialogTitle>
+					<DialogDescription className="text-white">
 						This action cannot be undone. This will permanently delete selected
 						account and remove its data from our servers.
 					</DialogDescription>

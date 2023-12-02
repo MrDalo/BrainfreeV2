@@ -7,6 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { QueryClient, useMutation } from '@tanstack/react-query';
 import { dateToLocalISO } from '@/app/date';
 import { Button } from '@/components/ui/button';
+import { DialogClose } from '@/components/ui/dialog';
 
 type FormInputs = {
 	title: string;
@@ -21,13 +22,15 @@ const TodoForm = ({
 	setEdit,
 	setOpen,
 	queryClient,
-	update
+	update,
+	fromList
 }: {
 	todo: Task;
-	setEdit: Dispatch<SetStateAction<boolean>>;
-	setOpen: Dispatch<SetStateAction<boolean>>;
-	queryClient: QueryClient;
-	update: () => void;
+	setEdit?: Dispatch<SetStateAction<boolean>>;
+	setOpen?: Dispatch<SetStateAction<boolean>>;
+	queryClient?: QueryClient;
+	update?: () => void;
+	fromList: boolean;
 }) => {
 	const {
 		register,
@@ -51,9 +54,10 @@ const TodoForm = ({
 				body: JSON.stringify(updatedTodo)
 			}),
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['taskInfo', { id }] });
-			update();
-			setEdit(false);
+			queryClient?.invalidateQueries({ queryKey: ['taskInfo', { id }] });
+			if (update) update();
+			if (setEdit) setEdit(false);
+			if (fromList && setOpen) setOpen(false);
 		}
 	});
 
@@ -63,7 +67,8 @@ const TodoForm = ({
 				method: 'DELETE'
 			}),
 		onSuccess: () => {
-			setOpen(false);
+			if (update) update();
+			if (setOpen) setOpen(false);
 		}
 	});
 
@@ -166,13 +171,24 @@ const TodoForm = ({
 				</div>
 			</div>
 			<div className="flex items-center justify-center gap-2 sm:gap-[2rem]">
-				<Button
-					variant="secondary"
-					disabled={mutation.isPending || mutationDelete.isPending}
-					onClick={() => setEdit(false)}
-				>
-					Back
-				</Button>
+				{!fromList ? (
+					<Button
+						variant="secondary"
+						disabled={mutation.isPending || mutationDelete.isPending}
+						onClick={() => {
+							if (setEdit) setEdit(false);
+						}}
+					>
+						Back
+					</Button>
+				) : (
+					<DialogClose asChild>
+						<Button type="button" variant="secondary">
+							Close
+						</Button>
+					</DialogClose>
+				)}
+
 				<Button
 					variant="destructive"
 					type="submit"
