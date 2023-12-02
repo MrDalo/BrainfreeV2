@@ -22,6 +22,7 @@ const ProfilePage = () => {
 					email={session?.user.email ? session.user.email : ''}
 					role={session?.user.role ? session.user.role : ''}
 					isManageUsers={false}
+					setInEditMode={setInEditMode}
 				/>
 			) : (
 				<ProfileInfo
@@ -32,7 +33,7 @@ const ProfilePage = () => {
 			)}
 
 			<button
-				className="rounded-xl bg-[#b0f191] px-4 py-2 text-black duration-200 hover:scale-105"
+				className="rounded-xl bg-[#b0f191] px-4 py-2 text-black duration-200 hover:bg-[#c9cccf]"
 				onClick={e => setInEditMode(!inEditMode)}
 			>
 				Edit profile

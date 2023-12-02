@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import {
 	Dialog,
@@ -17,8 +18,10 @@ import ProfileForm from '../../profileForm';
 type EditDialogProps = { user: User };
 
 const EditDialog = ({ user }: EditDialogProps) => {
+	const [open, setOpen] = React.useState<boolean>(false);
+
 	return (
-		<Dialog>
+		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
 				<Button variant="secondary">Edit</Button>
 			</DialogTrigger>
@@ -26,8 +29,7 @@ const EditDialog = ({ user }: EditDialogProps) => {
 				<DialogHeader>
 					<DialogTitle>Are you sure absolutely sure?</DialogTitle>
 					<DialogDescription>
-						This action cannot be undone. This will permanently delete selected
-						account and remove its data from our servers.
+						This action will edit user&apos;s name and role.
 					</DialogDescription>
 				</DialogHeader>
 				<ProfileForm
@@ -36,6 +38,7 @@ const EditDialog = ({ user }: EditDialogProps) => {
 					email={user.email ? user.email : ''}
 					role={user.role}
 					isManageUsers={true}
+					setOpen={setOpen}
 				/>
 			</DialogContent>
 		</Dialog>

@@ -88,7 +88,17 @@ const TodoForm = ({
 					className="w-full rounded-[1rem] border border-primary-green bg-primary-black px-3 py-1 text-[1rem] text-white"
 					defaultValue={todo.title as string}
 					{...register('title', { required: true, maxLength: 60 })}
-				></input>
+				/>
+				{errors.title?.type === 'required' && (
+					<span className="mt-1 w-full text-center text-red-400">
+						This field is required
+					</span>
+				)}
+				{errors.title?.type === 'maxLength' && (
+					<span className="mt-1 w-full text-center text-red-400">
+						Max length of 60 characters
+					</span>
+				)}
 			</div>
 			<div className="mb-[1rem] flex w-full flex-col items-start justify-start px-2 text-[1rem]">
 				<h3 className="text-primary-green">Description: </h3>
@@ -133,6 +143,12 @@ const TodoForm = ({
 						defaultValue={dateToLocalISO(new Date(todo.deadline)).slice(0, 16)}
 						{...register('deadline', { required: true })}
 					/>
+
+					{errors.deadline && (
+						<span className="mt-1 w-full text-center text-red-400">
+							This field is required
+						</span>
+					)}
 				</div>
 				<div className="mb-[1rem] flex flex-row items-start justify-start px-2 text-[1rem] sm:justify-end">
 					<h3 className="mr-4 text-primary-green">Completed: </h3>
