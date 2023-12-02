@@ -4,7 +4,7 @@ import { dateToLocalISO } from '@/app/date';
 import priorityTexts from '@/app/priority-texts';
 import { Button } from '@/components/ui/button';
 import { TaskPriority } from '@prisma/client';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -33,6 +33,8 @@ const TodoCreateForm = ({
 		formState: { errors }
 	} = useForm<FormInputs>();
 
+	const queryClient = useQueryClient();
+
 	const { data: session } = useSession();
 
 	const mutation = useMutation({
@@ -49,6 +51,7 @@ const TodoCreateForm = ({
 				body: JSON.stringify(newTodo)
 			}),
 		onSuccess: () => {
+			queryClient?.invalidateQueries({ queryKey: ['tasksList', 'all'] });
 			update();
 			setOpen(false);
 		},

@@ -26,7 +26,12 @@ const EditDialog = ({ task }: EditDialogProps) => {
 				<Button variant="secondary">Edit</Button>
 			</DialogTrigger>
 			<DialogContent className="bg-[#292929]">
-				<TodoForm todo={task} fromList={true} setOpen={setOpen} />
+				<TodoForm
+					todo={task}
+					fromList={true}
+					setOpen={setOpen}
+					queryClient={queryClient}
+				/>
 			</DialogContent>
 		</Dialog>
 	);

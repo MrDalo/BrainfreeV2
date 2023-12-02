@@ -56,6 +56,7 @@ const TodoForm = ({
 			}),
 		onSuccess: () => {
 			queryClient?.invalidateQueries({ queryKey: ['taskInfo', { id }] });
+			queryClient?.invalidateQueries({ queryKey: ['tasksList', 'all'] });
 			if (update) update();
 			if (setEdit) setEdit(false);
 			if (fromList && setOpen) setOpen(false);
@@ -71,6 +72,7 @@ const TodoForm = ({
 				method: 'DELETE'
 			}),
 		onSuccess: () => {
+			queryClient?.invalidateQueries({ queryKey: ['tasksList', 'all'] });
 			if (update) update();
 			if (setOpen) setOpen(false);
 		},
