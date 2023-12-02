@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import DnDContext from './DnDContext';
 import { Task, TaskPriority } from '@prisma/client';
 import { resetServerContext } from 'react-beautiful-dnd';
@@ -13,6 +13,7 @@ import DialogWrapper from './dialogWrapper';
 import { DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import DroppableTodoField from './droppableTodoField';
+import ErrorDialog from '../errorDialog';
 
 const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 	const [create, setCreate] = useState<boolean>(false);
@@ -105,20 +106,11 @@ const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 				</DialogWrapper>
 			)}
 			{isError && (
-				<DialogWrapper title="Error" open={isError} setOpen={setIsError}>
-					<p className="py-4">{errorMessage}</p>
-					<DialogFooter className="sm:justify-center">
-						<Button
-							type="button"
-							variant="secondary"
-							onClick={() => {
-								setIsError(false);
-							}}
-						>
-							Ok
-						</Button>
-					</DialogFooter>
-				</DialogWrapper>
+				<ErrorDialog
+					message={errorMessage}
+					open={isError}
+					setOpen={setIsError}
+				/>
 			)}
 			<Link
 				href="/dashboard/guide"

@@ -6,8 +6,9 @@ import { Button } from '@/components/ui/button';
 import { TaskPriority } from '@prisma/client';
 import { useMutation } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import ErrorDialog from '../errorDialog';
 
 type FormInputs = {
 	title: string;
@@ -50,6 +51,9 @@ const TodoCreateForm = ({
 		onSuccess: () => {
 			update();
 			setOpen(false);
+		},
+		onError: error => {
+			setIsError(true);
 		}
 	});
 
@@ -62,8 +66,17 @@ const TodoCreateForm = ({
 		mutation.mutate(data);
 	};
 
+	const [isError, setIsError] = useState<boolean>(false);
+
 	return (
 		<>
+			{isError && (
+				<ErrorDialog
+					message="Error updating tasks, try it again."
+					open={isError}
+					setOpen={setIsError}
+				/>
+			)}
 			<form
 				className="flex h-full w-full flex-col items-center justify-center font-normal"
 				onSubmit={handleSubmit(onSubmit)}
