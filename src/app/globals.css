@@ -239,3 +239,8 @@ body {
 .checkbox-wrapper-18 .round input[type='checkbox']:checked + label:after {
 	opacity: 1;
 }
+
+.bg-blur {
+	backdrop-filter: blur(3px);
+	-webkit-backdrop-filter: blur(3px);
+}

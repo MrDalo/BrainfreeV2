@@ -118,16 +118,18 @@ const TodoCreateForm = ({
 					<h3 className="mr-4 text-primary-green">Deadline: </h3>
 
 					<input
-						className="rounded-[1rem] border border-primary-green bg-primary-black px-3 py-1 text-[1rem] text-white"
+						className=" rounded-[1rem] border border-primary-green bg-primary-black  px-3 py-1 text-[1rem] text-white "
 						type="datetime-local"
 						{...register('deadline', { required: true })}
 					/>
 				</div>
 
 				<div className="flex items-center justify-center gap-[2rem]">
-					{/* TODO: jednotny style */}
-					{/* className="duration-[400ms] w-fit rounded-[1rem] border border-primary-green px-8 py-1 text-[1.2rem] text-primary-green transition hover:bg-primary-green hover:text-primary-black" */}
-					<Button type="submit" disabled={mutation.isPending}>
+					<Button
+						type="submit"
+						disabled={mutation.isPending}
+						className=" rounded-lg bg-primary-green text-primary-black"
+					>
 						{mutation.isPending ? 'Creating...' : 'Create'}
 					</Button>
 				</div>

@@ -41,10 +41,11 @@ const TodoView = ({
 			</div>
 			{/* TODO: style - ako pri edit userovi -> zeleny button */}
 			<Button
-					variant="secondary"
-					onClick={() => setEdit(true)}
-				>
-					Edit
+				variant="secondary"
+				onClick={() => setEdit(true)}
+				className=" bg-primary-green text-primary-black"
+			>
+				Edit
 			</Button>
 		</div>
 	);

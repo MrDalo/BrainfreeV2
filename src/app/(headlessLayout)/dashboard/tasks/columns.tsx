@@ -31,7 +31,6 @@ export const columns: ColumnDef<Task>[] = [
 		cell: ({ row }) => {
 			const description: string = row.getValue('description');
 			return (
-				// TODO: width
 				<div className="max-w-sm overflow-hidden text-ellipsis whitespace-nowrap">
 					{description}
 				</div>
@@ -71,7 +70,11 @@ export const columns: ColumnDef<Task>[] = [
 		},
 		cell: ({ row }) => {
 			const deadline: string = row.getValue('deadline');
-			return new Date(deadline).toLocaleDateString() + ' ' + new Date(deadline).toLocaleTimeString();
+			return (
+				new Date(deadline).toLocaleDateString() +
+				' ' +
+				new Date(deadline).toLocaleTimeString()
+			);
 		}
 	},
 	{

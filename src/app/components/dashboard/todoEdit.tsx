@@ -166,12 +166,11 @@ const TodoForm = ({
 					{mutationDelete.isPending ? 'Deleting...' : 'Delete'}
 				</Button>
 
-				{/* TODO: style - ako pri edit userovi -> zeleny button */}
 				<Button
 					variant="secondary"
 					type="submit"
 					disabled={mutation.isPending || mutationDelete.isPending}
-					onClick={() => setEdit(false)}
+					className=" bg-primary-green text-primary-black"
 				>
 					{mutation.isPending ? 'Saving...' : 'Save'}
 				</Button>
