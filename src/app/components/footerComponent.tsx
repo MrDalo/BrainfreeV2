@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-const Footer = () => {
+const FooterComponent = () => {
 	const router = useRouter();
 
 	const onArrowClick = () => {
@@ -96,4 +96,4 @@ const Footer = () => {
 	);
 };
 
-export default Footer;
+export default FooterComponent;

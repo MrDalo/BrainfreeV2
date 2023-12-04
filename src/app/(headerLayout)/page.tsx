@@ -1,8 +1,7 @@
-import Image from 'next/image';
 import IntroSection from '../components/introSection';
 import MatrixSection from '../components/matrixSection';
 import { Metadata } from 'next';
-import Footer from '../components/footer';
+import FooterComponent from '../components/footerComponent';
 
 export const metadata: Metadata = {
 	title: 'Brainfree',
@@ -16,7 +15,7 @@ export default function Home() {
 
 			<MatrixSection />
 
-			<Footer />
+			<FooterComponent />
 		</main>
 	);
 }
