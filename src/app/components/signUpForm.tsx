@@ -52,7 +52,7 @@ const SignUpForm = () => {
 				<button
 					onClick={() =>
 						signIn('google', {
-							callbackUrl: 'http://localhost:3000/dashboard'
+							callbackUrl: '/dashboard'
 						})
 					}
 					className=" button-shadow stroke-shadow relative flex w-[80%] flex-row items-center justify-center rounded-full border bg-white px-5 py-2 duration-100 hover:scale-105 sm:gap-[30%] md:w-2/3 md:gap-[20%]"
@@ -69,7 +69,7 @@ const SignUpForm = () => {
 				<button
 					onClick={() =>
 						signIn('discord', {
-							callbackUrl: 'http://localhost:3000/dashboard'
+							callbackUrl: '/dashboard'
 						})
 					}
 					className=" button-shadow stroke-shadow relative flex w-[80%] flex-row items-center justify-center rounded-full border bg-white px-5 py-2 duration-100 hover:scale-105 sm:gap-[30%] md:w-2/3 md:gap-[20%]"
