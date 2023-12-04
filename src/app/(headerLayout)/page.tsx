@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import IntroSection from '../components/introSection';
 import MatrixSection from '../components/matrixSection';
-import Footer from '../components/footer';
 import { Metadata } from 'next';
+import Footer from '../components/footer';
 
 export const metadata: Metadata = {
 	title: 'Brainfree',
