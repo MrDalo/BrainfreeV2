@@ -1,19 +1,16 @@
-import { getServerAuthSession } from '@/server/auth';
+import { db } from '@/server/db';
 import { redirect } from 'next/navigation';
-import React from 'react';
+import { getServerAuthSession } from '@/server/auth';
+import ManageUsersTable from '@/app/components/dashboard/manage-users/table';
 
-const DashboardPage = async () => {
-	// const status = await getServerAuthSession();
-	// console.log(status);
-	// if (!status) {
-	// 	// User unauthenticated, redirect to home
-	// 	redirect('/');
-	// }
-	return (
-		<div className=" flex items-center justify-center text-black">
-			<h1 className=" text-[3rem]">Manage users page</h1>
-		</div>
-	);
+const ManageUsersPage = async () => {
+	const status = await getServerAuthSession();
+	if (status?.user?.role !== 'ADMIN') {
+		redirect('/dashboard');
+	}
+
+	const users = await db.user.findMany({});
+	return <ManageUsersTable users={users} />;
 };
 
-export default DashboardPage;
+export default ManageUsersPage;

@@ -1,19 +1,19 @@
+import { db } from '@/server/db';
+import TasksTable from '@/app/components/dashboard/tasks/table';
 import { getServerAuthSession } from '@/server/auth';
-import { redirect } from 'next/navigation';
-import React from 'react';
 
-const DashboardPage = async () => {
-	// const status = await getServerAuthSession();
-	// console.log(status);
-	// if (!status) {
-	// 	// User unauthenticated, redirect to home
-	// 	redirect('/');
-	// }
-	return (
-		<div className=" flex items-center justify-center text-black">
-			<h1 className=" text-[3rem]">Tasks page</h1>
-		</div>
-	);
+const TasksPage = async () => {
+	const status = await getServerAuthSession();
+
+	const tasks = await db.task.findMany({
+		where: {
+			userId: status?.user?.id
+		}
+	});
+
+	const userId = status?.user?.id ?? '';
+
+	return <TasksTable id={userId} tasks={tasks} />;
 };
 
-export default DashboardPage;
+export default TasksPage;

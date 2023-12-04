@@ -1,19 +1,15 @@
 import React from 'react';
 
-import { getServerAuthSession } from '@/server/auth';
-import SignInForm from '@/app/components/sign-in-form';
-import SignInHeading from '@/app/components/sign-in-heading';
-import { redirect } from 'next/navigation';
+import SignInForm from '@/app/components/signInForm';
+import SignInHeading from '@/app/components/signInHeading';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Brainfree',
+	description: 'Prioritize with Eisenhower matrix'
+};
 
 const SignInPage = async () => {
-	// const status = await getServerAuthSession();
-
-	// // console.log(status);
-
-	// if (status) {
-	// 	redirect('/dashboard');
-	// }
-
 	return (
 		<main className="flex h-[120vh] flex-col  items-center justify-start bg-primary-green text-primary-black md:h-[100vh] md:flex-row">
 			<div className=" relative flex  h-full w-full flex-col items-center justify-center pt-10 md:w-1/2 md:pt-0">

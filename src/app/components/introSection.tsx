@@ -89,7 +89,7 @@ const IntroSection = () => {
 					viewBox="0 0 72 105"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
-					className=" mb-5 hidden animate-bounce cursor-pointer duration-150 hover:scale-110 md:inline-block"
+					className=" mb-5 hidden animate-bounce cursor-pointer duration-1000 hover:scale-110 md:inline-block"
 					onClick={onArrowClick}
 					initial={{ opacity: 0 }}
 					whileInView={{ opacity: 1 }}
