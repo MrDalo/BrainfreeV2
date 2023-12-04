@@ -1,6 +1,12 @@
 import React from 'react';
 import SignUpHeading from '@/app/components/signUpHeading';
 import SignUpForm from '@/app/components/signUpForm';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Brainfree',
+	description: 'Prioritize with Eisenhower matrix'
+};
 
 const SignUpPage = async () => {
 	return (

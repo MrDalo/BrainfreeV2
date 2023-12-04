@@ -10,10 +10,8 @@ import Pannels from './pannels';
 import TodoCreateForm from './todoCreate';
 import { useSession } from 'next-auth/react';
 import DialogWrapper from './dialogWrapper';
-import { DialogFooter } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import DroppableTodoField from './droppableTodoField';
 import ErrorDialog from '../errorDialog';
+import DroppableTodoField from './DroppableTodoField';
 
 const Dashboard = ({ tasks }: { tasks: Task[] }) => {
 	const [create, setCreate] = useState<boolean>(false);

@@ -20,7 +20,7 @@ const ProfilePage = () => {
 					id={session?.user.id ? session.user.id : ''}
 					name={session?.user.name ? session.user.name : ''}
 					email={session?.user.email ? session.user.email : ''}
-					role={session?.user.role ? session.user.role : ''}
+					role={session?.user.role ? session.user.role : undefined}
 					isManageUsers={false}
 					setInEditMode={setInEditMode}
 				/>

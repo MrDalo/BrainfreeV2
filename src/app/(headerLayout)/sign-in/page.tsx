@@ -2,6 +2,12 @@ import React from 'react';
 
 import SignInForm from '@/app/components/signInForm';
 import SignInHeading from '@/app/components/signInHeading';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Brainfree',
+	description: 'Prioritize with Eisenhower matrix'
+};
 
 const SignInPage = async () => {
 	return (

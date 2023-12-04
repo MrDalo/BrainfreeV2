@@ -1,8 +1,8 @@
 'use client';
 
 import { Droppable } from 'react-beautiful-dnd';
-import DraggableTodo from './draggableTodo';
 import { Task } from '@prisma/client';
+import DraggableTodo from './DraggableTodo';
 
 const DroppableTodoField = ({
 	droppableId,

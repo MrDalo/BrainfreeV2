@@ -2,6 +2,12 @@ import Image from 'next/image';
 import IntroSection from '../components/introSection';
 import MatrixSection from '../components/matrixSection';
 import Footer from '../components/footer';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Brainfree',
+	description: 'Prioritize with Eisenhower matrix'
+};
 
 export default function Home() {
 	return (
