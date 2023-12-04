@@ -5,7 +5,7 @@ import { getServerAuthSession } from '@/server/auth';
 import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
-	title: 'Brainfree',
+	title: 'BrainFree',
 	description: 'Prioritize with Eisenhower matrix'
 };
 

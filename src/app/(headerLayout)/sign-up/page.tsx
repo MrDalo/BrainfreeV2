@@ -4,7 +4,7 @@ import SignUpForm from '@/app/components/signUpForm';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-	title: 'Brainfree',
+	title: 'BrainFree',
 	description: 'Prioritize with Eisenhower matrix'
 };
 

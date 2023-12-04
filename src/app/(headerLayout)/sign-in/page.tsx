@@ -5,7 +5,7 @@ import SignInHeading from '@/app/components/signInHeading';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-	title: 'Brainfree',
+	title: 'BrainFree',
 	description: 'Prioritize with Eisenhower matrix'
 };
 

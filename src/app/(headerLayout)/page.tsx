@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 import FooterComponent from '../components/footerComponent';
 
 export const metadata: Metadata = {
-	title: 'Brainfree',
+	title: 'BrainFree',
 	description: 'Prioritize with Eisenhower matrix'
 };
 
