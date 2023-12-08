@@ -5,14 +5,16 @@ import { User } from '@prisma/client';
 import { columns } from '@/app/(headlessLayout)/dashboard/manage-users/columns';
 import { DataTable } from '../../dataTable';
 
-type Props = {
-	users: User[];
-};
+const ManageUsersTable = () => {
+	const usersFromQuery = UsersQuery();
+	const emptyUsers: User[] = [];
 
-const ManageUsersTable = (props: Props) => {
-	const usersFromQuery = UsersQuery(props.users);
-
-	return <DataTable columns={columns} data={usersFromQuery.data} />;
+	return (
+		<DataTable
+			columns={columns}
+			data={usersFromQuery.data == undefined ? emptyUsers : usersFromQuery.data}
+		/>
+	);
 };
 
 export default ManageUsersTable;

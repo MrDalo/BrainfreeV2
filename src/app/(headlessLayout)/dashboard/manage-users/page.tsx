@@ -9,8 +9,7 @@ const ManageUsersPage = async () => {
 		redirect('/dashboard');
 	}
 
-	const users = await db.user.findMany({});
-	return <ManageUsersTable users={users} />;
+	return <ManageUsersTable />;
 };
 
 export default ManageUsersPage;
