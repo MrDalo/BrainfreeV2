@@ -6,7 +6,11 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'BrainFree',
-	description: 'Prioritize with Eisenhower matrix'
+	description: 'Prioritize with Eisenhower matrix',
+	metadataBase: new URL('https://brainfree-v2.vercel.app/'),
+	openGraph: {
+		images: '/img/og-image.png'
+	}
 };
 
 const SignInPage = async () => {
