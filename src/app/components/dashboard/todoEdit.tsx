@@ -99,7 +99,9 @@ const TodoForm = ({
 				/>
 			)}
 			<form
-				className="flex h-full w-full flex-col items-center justify-center font-normal"
+				className={`flex h-full ${
+					fromList ? 'w-full' : 'w-full'
+				}  flex-col items-center justify-center font-normal`}
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<h2 className="mb-[1.5rem] text-[2rem] font-light text-primary-green">
@@ -157,7 +159,7 @@ const TodoForm = ({
 						</option>
 					</select>
 				</div>
-				<div className="mb-[2rem] flex w-full flex-col justify-between sm:flex-row">
+				<div className="mb-[2rem] flex w-full flex-col justify-between sm:flex-col">
 					<div className="mb-[1rem] flex flex-row items-start justify-start px-2 text-[1rem]">
 						<h3 className="mr-4 text-primary-green">Deadline: </h3>
 

@@ -25,7 +25,7 @@ const EditDialog = ({ task }: EditDialogProps) => {
 			<DialogTrigger asChild>
 				<Button variant="secondary">Edit</Button>
 			</DialogTrigger>
-			<DialogContent className="bg-[#292929]">
+			<DialogContent className="  bg-[#292929]">
 				<TodoForm
 					todo={task}
 					fromList={true}
