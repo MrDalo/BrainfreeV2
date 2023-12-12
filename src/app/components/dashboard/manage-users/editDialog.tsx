@@ -25,9 +25,9 @@ const EditDialog = ({ user }: EditDialogProps) => {
 			<DialogTrigger asChild>
 				<Button variant="secondary">Edit</Button>
 			</DialogTrigger>
-			<DialogContent className="bg-[#292929]">
+			<DialogContent className="bg-[#292929] text-white">
 				<DialogHeader>
-					<DialogTitle>Are you sure absolutely sure?</DialogTitle>
+					<DialogTitle>Edit Profile</DialogTitle>
 					<DialogDescription>
 						This action will edit user&apos;s name and role.
 					</DialogDescription>
