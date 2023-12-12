@@ -140,6 +140,7 @@ const ProfileForm = ({
 							id="role"
 							{...register('role')}
 							className=" rounded-md px-2 py-1 text-black"
+							defaultValue={data.data?.role}
 						>
 							<option value="USER">User</option>
 							<option value="ADMIN">Admin</option>
